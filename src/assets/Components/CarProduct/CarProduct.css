@@ -1,0 +1,199 @@
+.car-wrapper {
+  width: 100%;
+  background-color: #1f1f1f;
+  color: #fff;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.car-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.car-wrapper:hover::before {
+  left: 100%;
+}
+
+.car-wrapper:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(196, 255, 0, 0.3);
+}
+
+/* Selected state */
+.car-wrapper.selected {
+  border-color: #c4ff00;
+  background-color: #252525;
+  box-shadow: 0 0 25px rgba(196, 255, 0, 0.2);
+  transform: translateY(-8px);
+}
+
+.car-wrapper.selected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c4ff00, #a8e000);
+}
+
+.car-img {
+  width: 100%;
+  height: auto; /* Allow image to define its height based on aspect ratio */
+  object-fit: contain;
+  border-radius: 10px 10px 0 0;
+  transition: transform 0.3s ease;
+}
+
+.car-wrapper:hover .car-img {
+  transform: scale(1.05);
+}
+
+.car-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.car-content-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  color: #ffffff;
+} 
+
+.car-content-type {
+  color: #4a9eff;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.car-content-btn {
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: none;
+  background: #c4ff00;
+  color: #000000;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  min-width: 90px;
+}
+
+.car-content-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196, 255, 0, 0.3);
+  background: #b8f000;
+}
+
+.car-content-btn:active {
+  transform: translateY(0);
+}
+
+/* Active/Selected button state */
+.car-content-btn.active {
+  background: #ff4444;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 68, 68, 0);
+  }
+}
+
+.car-content-btn.active:hover {
+  background: #e53935;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .car-img {
+    /* max-height removed, height is auto */
+  }
+  
+  .car-content-title {
+    font-size: 1.15rem;
+  }
+  
+  .car-content-type {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .car-img {
+    /* max-height removed, height is auto */
+  }
+  
+  .car-content-title {
+    font-size: 1.3rem;
+  }
+  
+  .car-content-type {
+    font-size: 1.1rem;
+  }
+  
+  .car-content-btn {
+    font-size: 1rem;
+    padding: 10px 16px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-img {
+    /* max-height removed, height is auto */
+  }
+  
+  .car-content {
+    padding: 12px;
+  }
+  
+  .car-content-title {
+    font-size: 1.1rem;
+  }
+  
+  .car-content-type {
+    font-size: 0.9rem;
+  }
+  
+  .car-content-btn {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+    min-width: 80px;
+  }
+}
