@@ -35,8 +35,18 @@ const CarDetailsPanel = ({ car, isOpen, onClose, onBuyClick }) => {
               <span className="car-details-type">{t(car.type.toLowerCase())}</span>
             </div>
             <div className="car-price-section">
-              <span className="price-value">${car.price || '68,900'}</span>
-              <span className="price-period">/ Purchase</span>
+              {car.prices && car.prices.length > 0 ? (
+                car.prices.map((priceItem, index) => (
+                  <div key={index} className="price-item">
+                    <span className="price-value">
+                      {t(priceItem.range)} - {priceItem.value} {t('uzs')}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <span className="price-value">{car.price || '68,900'} {t('uzs')}</span>
+              )}
+              <span className="price-period">/ {t('purchase')}</span>
             </div>
           </div>
 
@@ -76,8 +86,8 @@ const CarDetailsPanel = ({ car, isOpen, onClose, onBuyClick }) => {
                   </svg>
                 </div>
                 <div className="spec-content">
-                  <span className="spec-label">Engine:</span>
-                  <span className="spec-value">{car.type === 'Electric' ? 'Electric Motor' : 'Hybrid System'}</span>
+                  <span className="spec-label">{t('engine')}:</span>
+                  <span className="spec-value">{car.type === 'Electric' ? t('electricMotor') : t('hybridSystem')}</span>
                 </div>
               </div>
 
@@ -88,8 +98,8 @@ const CarDetailsPanel = ({ car, isOpen, onClose, onBuyClick }) => {
                   </svg>
                 </div>
                 <div className="spec-content">
-                  <span className="spec-label">Seating:</span>
-                  <span className="spec-value">5 Passengers</span>
+                  <span className="spec-label">{t('seating')}:</span>
+                  <span className="spec-value">{t('fivePassengers')}</span>
                 </div>
               </div>
             </div>
@@ -114,8 +124,8 @@ const CarDetailsPanel = ({ car, isOpen, onClose, onBuyClick }) => {
                   </svg>
                 </div>
                 <div className="spec-content">
-                  <span className="spec-label">Transmission:</span>
-                  <span className="spec-value">Automatic</span>
+                  <span className="spec-label">{t('transmission')}:</span>
+                  <span className="spec-value">{t('automatic')}</span>
                 </div>
               </div>
             </div>
@@ -123,17 +133,17 @@ const CarDetailsPanel = ({ car, isOpen, onClose, onBuyClick }) => {
 
           {/* Description */}
           <div className="car-description">
-            <p>{car.description || `${car.title} combines cutting-edge technology with exceptional performance. Built with premium materials and advanced safety features for the ultimate driving experience.`}</p>
+            <p>{car.description || `${car.title} ${t('descriptionFallback')}`}</p>
           </div>
 
           {/* Action Buttons */}
           <div className="car-actions">
-            <button className="contact-button">
+            <a href={`tel:${t('companyPhoneNumber')}`} className="contact-button">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
               </svg>
-              Contact Dealer
-            </button>
+              {t('contactDealer')}
+            </a>
             <button className="buy-button" onClick={() => onBuyClick(car)}>
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>

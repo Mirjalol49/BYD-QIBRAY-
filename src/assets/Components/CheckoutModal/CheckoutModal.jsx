@@ -12,6 +12,7 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [showValidationErrors, setShowValidationErrors] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -24,14 +25,14 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
   const sendToTelegram = async (data, carInfo) => {
     const botToken = '8378416167:AAGB5aQB0S0ddcsX1mzCvSxmCYEjKrvlYvA'
     // Use your personal chat ID or group chat ID instead of channel username
-    const chatId = '1234567890' // Replace with your actual chat ID
+    const chatId = '1907166652' // Replace with your actual chat ID
     
     const message = `💰 *YANGI SOTIB OLISH SO'ROVI*
 
 🚗 *Avtomobil ma'lumotlari:*
 ▫️ Model: ${carInfo?.title || 'BYD'}
 ▫️ Tur: ${carInfo?.type || 'Elektr'}
-▫️ Narx: $${carInfo?.price || 'N/A'}
+▫️ Narx: ${carInfo?.prices && carInfo.prices.length > 0 ? `${carInfo.prices[0].value} ${t('uzs')}` : t('N/A')}
 
 👤 *Mijoz ma'lumotlari:*
 ▫️ Ism: ${data.name}
@@ -79,11 +80,13 @@ ${data.notes || 'Izoh yo\'q'}
     
     if (!formData.name || !formData.phone) {
       setSubmitStatus('error')
+      setShowValidationErrors(true) // Show validation errors
       return
     }
 
     setIsSubmitting(true)
     setSubmitStatus(null)
+    setShowValidationErrors(false) // Hide validation errors on successful submission attempt
 
     try {
       const result = await sendToTelegram(formData, car)
@@ -127,10 +130,15 @@ ${data.notes || 'Izoh yo\'q'}
         <div className="modal-body">
           {car && (
             <div className="car-summary">
-              <h3 className="car-title">{car.title}</h3>
-              <div className="car-details">
-                <span className="car-type">{t(car.type?.toLowerCase() || 'electric')}</span>
-                <span className="car-price">${car.price}</span>
+              <img src={car.img} alt={car.title} className="car-summary-image" />
+              <div className="car-summary-details">
+                <h3 className="car-title">{car.title}</h3>
+                <div className="car-details">
+                  <span className="car-type">{t(car.type?.toLowerCase() || 'electric')}</span>
+                  {car.prices && car.prices.length > 0 && (
+                    <span className="car-price">{car.prices[0].value} {t('uzs')}</span>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -153,7 +161,7 @@ ${data.notes || 'Izoh yo\'q'}
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="form-input"
+                    className={`form-input ${(showValidationErrors && !formData.name) ? 'invalid' : ''}`}
                     placeholder={t('fullNamePlaceholder')}
                     required
                   />
@@ -169,7 +177,7 @@ ${data.notes || 'Izoh yo\'q'}
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="form-input"
+                    className={`form-input ${(showValidationErrors && !formData.phone) ? 'invalid' : ''}`}
                     placeholder="+998 __ ___ __ __"
                     required
                   />

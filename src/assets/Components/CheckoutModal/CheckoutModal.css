@@ -18,6 +18,21 @@
   padding: 20px 28px;
   margin-bottom: 24px;
   border-radius: 16px;
+  display: flex; /* Added for layout */
+  align-items: center; /* Vertically align items */
+  gap: 20px; /* Space between image and details */
+}
+
+.car-summary-image {
+  width: 100px; /* Fixed width for the image */
+  height: 60px; /* Fixed height for the image */
+  object-fit: cover; /* Ensure image covers the area */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.car-summary-details {
+  flex: 1; /* Allows details to take remaining space */
 }
 
 .car-title {
@@ -75,6 +90,32 @@
   gap: 24px;
 }
 
+.form-input {
+  padding: 14px 16px;
+  border: 2px solid #333333;
+  border-radius: 12px;
+  background: #2a2a2a;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #c4ff00;
+  box-shadow: 0 0 0 3px rgba(196, 255, 0, 0.1);
+}
+
+.form-input::placeholder {
+  color: #888888;
+}
+
+.form-input.invalid {
+  border-color: #ef4444; /* Red border for invalid input */
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
 .form-textarea {
   padding: 14px 16px;
   border: 2px solid #333333;
@@ -85,8 +126,8 @@
   font-family: inherit;
   transition: all 0.3s ease;
   outline: none;
-  resize: vertical;
-  min-height: 80px;
+  resize: vertical; /* Only for textareas */
+  min-height: 80px; /* Only for textareas */
 }
 
 .form-textarea:focus {
@@ -180,6 +221,21 @@
 
   .car-price {
     font-size: 20px;
+  }
+
+  .car-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .car-summary-image {
+    width: 120px;
+    height: 70px;
+  }
+
+  .car-summary-details {
+    width: 100%;
   }
 
   .section-title {

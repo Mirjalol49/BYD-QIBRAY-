@@ -4,20 +4,13 @@ import { useLanguage } from '../../../context/LanguageContext'
 import Logo from "../../Images/logo.png"
 import "./Sidebar.css"
 
-const Sidebar = ({ isMobile, onTestDriveClick }) => {
-  const [isExpanded, setIsExpanded] = useState(true)
-  const [isMobileOpen, setIsMobileOpen] = useState(false)
+const Sidebar = ({ onTestDriveClick }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState({})
   const { currentLanguage, changeLanguage, t } = useLanguage()
 
-  const toggleExpanded = () => {
-    if (!isMobile) {
-      setIsExpanded(!isExpanded)
-    }
-  }
-
-  const toggleMobile = () => {
-    setIsMobileOpen(!isMobileOpen)
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
   }
 
   const toggleMenuItem = (itemId) => {
@@ -36,7 +29,7 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
         </svg>
       ), 
       label: t('location'), 
-      href: "#location" 
+      href: "https://yandex.uz/maps/org/92414484048/?ll=69.456601%2C41.391577&z=14.29" 
     },
     { 
       id: 'testdrive',
@@ -71,7 +64,7 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
     },
     {
       name: 'Telegram',
-      url: 'https://t.me/bydqibray',
+      url: 'https://t.me/bydqibray?fbclid=PAZXh0bgNhZW0CMTEAAadcpXuWJoNFdQmv5iIdPMmqJrXvvbODiOsFY8Ha6cAG-IpYzky4HJO0tBa-NA_aem_WFHsyADeCU5hfYeQwNgLeg',
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor">
           <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
@@ -88,25 +81,8 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
 
   return (
     <>
-      {/* Mobile Hamburger Button */}
-      {isMobile && (
-        <button
-          className={`mobile-hamburger ${isMobileOpen ? 'active' : ''}`}
-          onClick={toggleMobile}
-          aria-label="Toggle mobile menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      )}
-
-              {/* Sidebar */}
-        <div className={`professional-sidebar ${
-          isMobile 
-            ? (isMobileOpen ? 'mobile-open' : 'mobile-closed')
-            : (isExpanded ? 'expanded' : 'collapsed')
-        }`}>
+              {/* Sidebar should always be present and responsive */}
+        <div className={`professional-sidebar ${isSidebarOpen ? 'open' : ''}`}>
           
           {/* Header with Logo and Brand */}
           <div className="sidebar-header">
@@ -114,148 +90,110 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
               <div className="brand-icon">
                 <img src={Logo} alt="BYD Logo" />
               </div>
-              {(isExpanded || isMobile) && (
-                <span className="brand-name">BYD Motors</span>
-              )}
+              <span className="brand-name">BYD QIBRAY</span>
             </div>
-            {!isMobile && (
-              <button className="sidebar-toggle" onClick={toggleExpanded}>
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-                </svg>
-              </button>
-            )}
           </div>
 
           {/* Menu Items */}
-          {(isExpanded || isMobile) && (
-            <div className="menu-section">
-              <nav className="menu-items">
-                {menuItems.map((item) => (
-                  <div key={item.id} className="menu-item-wrapper">
-                    {item.id === 'testdrive' ? (
-                      <button 
-                        onClick={onTestDriveClick} 
-                        className="menu-item menu-button"
-                      >
-                        <div className="menu-icon">
-                          {item.icon}
-                        </div>
-                        <span className="menu-label">{item.label}</span>
-                      </button>
-                    ) : (
-                      <a href={item.href} className="menu-item">
-                        <div className="menu-icon">
-                          {item.icon}
-                        </div>
-                        <span className="menu-label">{item.label}</span>
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </nav>
-            </div>
-          )}
+          <div className="menu-section">
+            <nav className="menu-items">
+              {menuItems.map((item) => (
+                <div key={item.id} className="menu-item-wrapper">
+                  {item.id === 'testdrive' ? (
+                    <button 
+                      onClick={onTestDriveClick} 
+                      className="menu-item menu-button"
+                    >
+                      <div className="menu-icon">
+                        {item.icon}
+                      </div>
+                      <span className="menu-label">{item.label}</span>
+                    </button>
+                  ) : (
+                    <a href={item.href} className="menu-item" target="_blank" rel="noopener noreferrer">
+                      <div className="menu-icon">
+                        {item.icon}
+                      </div>
+                      <span className="menu-label">{item.label}</span>
+                    </a>
+                  )}
+                </div>
+              ))}
+            </nav>
+          </div>
 
         {/* Promotional Hook */}
-        {(isExpanded || isMobile) && (
-          <div className="promo-hook">
-            <div className="promo-text">
-              {t('promoText')}
-            </div>
+        <div className="promo-hook">
+          <div className="promo-text">
+            {t('promoText')}
           </div>
-        )}
+        </div>
 
         {/* Contact Information */}
-        {(isExpanded || isMobile) && (
-          <div className="contact-info">
-            <div className="phone-number">
-              <svg className="phone-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
-              </svg>
-              <a href="tel:+998559008808">+998 55 900 88 08</a>
-            </div>
+        <div className="contact-info">
+          <div className="phone-number">
+            <svg className="phone-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+            </svg>
+            <a href="tel:+998559008808">+998 55 900 88 08</a>
           </div>
-        )}
+        </div>
 
         {/* Social Media Links */}
-        {(isExpanded || isMobile) && (
-          <div className="social-links">
-            {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-                title={social.name}
-              >
-                <div className="social-icon">
-                  {social.icon}
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
+        <div className="social-links">
+          {socialLinks.map((social, index) => (
+            <a
+              key={index}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              title={social.name}
+            >
+              <div className="social-icon">
+                {social.icon}
+              </div>
+            </a>
+          ))}
+        </div>
 
         {/* Language Switcher */}
         <div className="language-section">
           <div className="language-selector">
-            <div className="current-language" onClick={toggleExpanded}>
+            <div className="current-language" onClick={toggleSidebar}>
               <span className="language-flag">
                 {languages.find(lang => lang.code === currentLanguage)?.flag}
               </span>
-              {(isExpanded || isMobile) && (
-                <span className="language-name">
-                  {languages.find(lang => lang.code === currentLanguage)?.label}
-                </span>
-              )}
+              <span className="language-name">
+                {languages.find(lang => lang.code === currentLanguage)?.label}
+              </span>
             </div>
             
-            {(isExpanded || isMobile) && (
-              <div className="language-dropdown">
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    className={`language-option ${currentLanguage === lang.code ? 'active' : ''}`}
-                    onClick={() => changeLanguage(lang.code)}
-                  >
-                    <span className="language-flag">{lang.flag}</span>
-                    <span className="language-label">{lang.label}</span>
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="language-dropdown">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  className={`language-option ${currentLanguage === lang.code ? 'active' : ''}`}
+                  onClick={() => changeLanguage(lang.code)}
+                >
+                  <span className="language-flag">{lang.flag}</span>
+                  <span className="language-label">{lang.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Company Info (only when expanded) */}
-        {(isExpanded || isMobile) && (
-          <div className="sidebar-footer">
-            <div className="company-info">
-              <p className="company-tagline">
-                {t('companyTagline')}
-              </p>
-            </div>
+        <div className="sidebar-footer">
+          <div className="company-info">
+            <a href={`tel:${t('companyPhoneNumber')}`} className="company-phone">
+              {t('companyPhoneNumber')}
+            </a>
           </div>
-        )}
+        </div>
 
-        {/* Mobile Close Button */}
-        {isMobile && isMobileOpen && (
-          <button
-            className="mobile-close"
-            onClick={toggleMobile}
-            aria-label="Close mobile menu"
-          >
-            ×
-          </button>
-        )}
       </div>
-
-      {/* Mobile Overlay */}
-      {isMobile && isMobileOpen && (
-        <div className="mobile-overlay" onClick={toggleMobile}></div>
-      )}
     </>
   );
 };

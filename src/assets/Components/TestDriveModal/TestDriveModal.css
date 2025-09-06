@@ -101,7 +101,7 @@
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
@@ -112,6 +112,7 @@
   font-size: 14px;
   font-weight: 600;
   color: #ffffff;
+  margin-bottom: 8px;
 }
 
 .label-icon {
@@ -312,92 +313,4 @@
 
 .test-drive-modal::-webkit-scrollbar-thumb:hover {
   background: #555555;
-}
-
-/* React Datepicker Custom Styles */
-.react-datepicker-custom {
-  background-color: #1a1a1a;
-  border: 1px solid #333333;
-  font-family: inherit;
-  border-radius: 12px;
-  padding: 10px;
-}
-
-.react-datepicker__header {
-  background-color: #1a1a1a;
-  border-bottom: 1px solid #333333;
-  padding-top: 8px;
-  color: #c4ff00;
-}
-
-.react-datepicker__current-month,
-.react-datepicker__day-name {
-  color: #ffffff;
-}
-
-.react-datepicker__navigation--previous,
-.react-datepicker__navigation--next {
-  background-color: #333333;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  margin: 5px;
-}
-
-.react-datepicker__navigation--previous:hover,
-.react-datepicker__navigation--next:hover {
-  background-color: #404040;
-}
-
-.react-datepicker__navigation-icon::before {
-  border-color: #ffffff;
-  top: 9px;
-}
-
-.react-datepicker__day,
-.react-datepicker__time-name {
-  color: #cccccc;
-  margin: 4px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.react-datepicker__day:hover {
-  background-color: #333333;
-  color: #ffffff;
-}
-
-.react-datepicker__day--selected,
-.react-datepicker__day--keyboard-selected {
-  background-color: #c4ff00;
-  color: #000000;
-  font-weight: 600;
-  border-radius: 8px;
-}
-
-.react-datepicker__day--outside-month {
-  color: #666666;
-}
-
-.react-datepicker__day--disabled {
-  color: #444444;
-  cursor: not-allowed;
-}
-
-.react-datepicker__week .react-datepicker__day:first-child,
-.react-datepicker__week .react-datepicker__day:last-child {
-  color: #ff6b6b; /* Highlight weekend days */
-}
-
-.react-datepicker__triangle {
-  display: none; /* Hide the triangle pointer */
 }

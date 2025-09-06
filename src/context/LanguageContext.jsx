@@ -31,6 +31,49 @@ export const translations = {
       "Supercharger tarmoq kirishi",
       "Mobil ilova ulanishi"
     ],
+    // Car details new
+    engine: "Dvigatel",
+    electricMotor: "Elektr dvigateli",
+    hybridSystem: "Gibrid tizim",
+    seating: "O'rindiqlar",
+    fivePassengers: "5 Yo'lovchi",
+    transmission: "Transmissiya",
+    automatic: "Avtomatik",
+    contactDealer: "Diler bilan bog'lanish",
+    purchase: "Xarid",
+    descriptionFallback: "keskin texnologiyalar va ajoyib ishlashni birlashtiradi. Yuqori sifatli materiallar va ilg'or xavfsizlik funksiyalari bilan qurilgan bo'lib, eng yaxshi haydash tajribasini ta'minlaydi.",
+    companyPhoneNumber: "+998 55 900 88 08",
+
+    // Car models
+    chazor: "CHAZOR",
+    songpro: "SONG PRO",
+    songplusdmichampion: "SONG PLUS DM-i CHAMPION",
+    songplusevchampion: "SONG PLUS EV CHAMPION",
+    seagull: "SEAGULL",
+    e2: "E2",
+    yuanup: "YUAN UP",
+    sealion07: "SEALION 07",
+
+    // Car descriptions
+    chazorDescription: "BYD Chazor yuqori sifatli gibrid texnologiyasini hashamatli qulaylik bilan birlashtiradi. Ishlashdan voz kechmasdan samaradorlikni qadrlaydigan zamonaviy haydovchi uchun yaratilgan.",
+    songproDescription: "BYD Song Pro DM-i ilg'or gibrid texnologiyasiga ega bo'lib, optimal samaradorlik uchun elektr va benzin quvvati o'rtasida uzluksiz almashadi.",
+    songplusdmichampionDescription: "BYD Song Plus DM-i Champion, yuqori samaradorlik va kuchli ishlashni birlashtirgan, sport va oilaviy foydalanish uchun mos gibrid SUV.",
+    songplusevchampionDescription: "BYD Song Plus EV Champion, uzoq masofali elektr avtomobil bo'lib, yuqori texnologiyalar va keng ichki makonni taklif etadi. Shahar va sayohatlar uchun ideal.",
+    seagullDescription: "BYD Seagull sifatdan taviz bermaydigan arzon elektr avtomobil. Ishonchliligi va samaradorligini qidirayotgan birinchi marta elektr avtomobil xaridorlari uchun mukammal.",
+    e2Description: "BYD E2, shahar harakati uchun mo'ljallangan ixcham elektr avtomobil. Uning zamonaviy dizayni va ilg'or akkumulyator texnologiyasi bilan shahar ichida haydash uchun juda mos keladi.",
+    yuanupDescription: "BYD Yuan UP, SUV ning amaliyligini elektr dvigatelining samaradorligi bilan birlashtirgan ko'p qirrali krossover.",
+    sealion07Description: "BYD Sealion 07 yuqori mustahkamlikdagi arxitektura va pastga o'rnatilgan akkumulyator batareyasi bilan qurilgan bo'lib, yo'lovchilar uchun ajoyib himoyani ta'minlaydi.",
+
+    // Car trims
+    active: "Active",
+    luxe: "Luxe",
+    comfort: "Comfort",
+    flagship: "Flagship",
+    flying: "Flying",
+    luxury: "Luxury",
+    
+    // Currency
+    uzs: "so'm",
     // Car types
     hybrid: "Gibrid",
     electric: "Elektr",
@@ -42,12 +85,13 @@ export const translations = {
     phoneNumber: "Telefon raqam",
     preferredDate: "Kerakli sana",
     preferredTime: "Kerakli vaqt",
-    selectTime: "Vaqtni tanlang",
     cancel: "Bekor qilish",
     scheduleTestDrive: "Test Drive belgilash",
     submitting: "Yuborilmoqda...",
     submitError: "Xatolik yuz berdi. Qaytadan urinib ko'ring.",
     submitSuccess: "Muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.",
+    selectDate: "Sanani tanlang",
+    selectTime: "Vaqtni tanlang",
     // Checkout Modal
     checkoutTitle: "Sotib olish",
     personalInfo: "Shaxsiy ma'lumotlar",
@@ -94,6 +138,49 @@ export const translations = {
       "Supercharger network access",
       "Mobile app connectivity"
     ],
+    // Car details new
+    engine: "Engine",
+    electricMotor: "Electric Motor",
+    hybridSystem: "Hybrid System",
+    seating: "Seating",
+    fivePassengers: "5 Passengers",
+    transmission: "Transmission",
+    automatic: "Automatic",
+    contactDealer: "Contact Dealer",
+    purchase: "Purchase",
+    descriptionFallback: "combines cutting-edge technology with exceptional performance. Built with premium materials and advanced safety features for the ultimate driving experience.",
+    companyPhoneNumber: "+998 55 900 88 08",
+
+    // Car models
+    chazor: "CHAZOR",
+    songpro: "SONG PRO",
+    songplusdmichampion: "SONG PLUS DM-i CHAMPION",
+    songplusevchampion: "SONG PLUS EV CHAMPION",
+    seagull: "SEAGULL",
+    e2: "E2",
+    yuanup: "YUAN UP",
+    sealion07: "SEALION 07",
+
+    // Car descriptions
+    chazorDescription: "The BYD Chazor combines cutting-edge hybrid technology with luxurious comfort. Built for the modern driver who values efficiency without compromising on performance.",
+    songproDescription: "The BYD Song Pro DM-i features advanced hybrid technology that seamlessly switches between electric and gasoline power for optimal efficiency.",
+    songplusdmichampionDescription: "The BYD Song Plus DM-i Champion is a hybrid SUV that combines high efficiency and powerful performance, suitable for both sporty and family use.",
+    songplusevchampionDescription: "The BYD Song Plus EV Champion is a long-range electric vehicle offering high technology and a spacious interior. Ideal for city and travel.",
+    seagullDescription: "The BYD Seagull is an affordable electric vehicle that doesn't compromise on quality. Perfect for first-time EV buyers looking for reliability and efficiency.",
+    e2Description: "The BYD E2 is a compact electric vehicle designed for urban mobility. With its sleek design and advanced battery technology, it's perfect for city driving.",
+    yuanupDescription: "The BYD Yuan UP is a versatile crossover that combines the practicality of an SUV with the efficiency of an electric powertrain.",
+    sealion07Description: "The BYD Sealion 07 is built from the ground up as an electric SUV, with a high-strength architecture and floor-mounted battery pack for incredible occupant protection.",
+
+    // Car trims
+    active: "Active",
+    luxe: "Luxe",
+    comfort: "Comfort",
+    flagship: "Flagship",
+    flying: "Flying",
+    luxury: "Luxury",
+
+    // Currency
+    uzs: "UZS",
     // Car types
     hybrid: "Hybrid",
     electric: "Electric",
@@ -105,12 +192,13 @@ export const translations = {
     phoneNumber: "Phone Number",
     preferredDate: "Preferred Date",
     preferredTime: "Preferred Time",
-    selectTime: "Select Time",
     cancel: "Cancel",
     scheduleTestDrive: "Schedule Test Drive",
     submitting: "Submitting...",
     submitError: "An error occurred. Please try again.",
     submitSuccess: "Successfully submitted! We will contact you soon.",
+    selectDate: "Select Date",
+    selectTime: "Select Time",
     // Checkout Modal
     checkoutTitle: "Purchase",
     personalInfo: "Personal Information",
@@ -157,6 +245,49 @@ export const translations = {
       "Доступ к сети Supercharger",
       "Подключение к мобильному приложению"
     ],
+    // Car details new
+    engine: "Двигатель",
+    electricMotor: "Электродвигатель",
+    hybridSystem: "Гибридная система",
+    seating: "Мест",
+    fivePassengers: "5 Пассажиров",
+    transmission: "Трансмиссия",
+    automatic: "Автоматическая",
+    contactDealer: "Связаться с дилером",
+    purchase: "Покупка",
+    descriptionFallback: "сочетает в себе передовые технологии с исключительной производительностью. Созданный из высококачественных материалов и передовых функций безопасности для максимального удовольствия от вождения.",
+    companyPhoneNumber: "+998 55 900 88 08",
+
+    // Car models
+    chazor: "CHAZOR",
+    songpro: "SONG PRO",
+    songplusdmichampion: "SONG PLUS DM-i CHAMPION",
+    songplusevchampion: "SONG PLUS EV CHAMPION",
+    seagull: "SEAGULL",
+    e2: "E2",
+    yuanup: "YUAN UP",
+    sealion07: "SEALION 07",
+
+    // Car descriptions
+    chazorDescription: "BYD Chazor сочетает передовые гибридные технологии с роскошным комфортом. Создан для современного водителя, который ценит эффективность без ущерба для производительности.",
+    songproDescription: "BYD Song Pro DM-i оснащен передовой гибридной технологией, которая плавно переключается между электрической и бензиновой мощностью для оптимальной эффективности.",
+    songplusdmichampionDescription: "BYD Song Plus DM-i Champion — это гибридный внедорожник, сочетающий высокую эффективность и мощную производительность, подходящий как для спортивного, так и для семейного использования.",
+    songplusevchampionDescription: "BYD Song Plus EV Champion — это электромобиль с большим запасом хода, предлагающий высокие технологии и просторный интерьер. Идеально подходит для города и путешествий.",
+    seagullDescription: "BYD Seagull — это доступный электромобиль, который не уступает в качестве. Идеально подходит для тех, кто впервые покупает электромобиль и ищет надежность и эффективность.",
+    e2Description: "BYD E2 — это компактный электромобиль, предназначенный для городской мобильности. Благодаря своему элегантному дизайну и передовой технологии аккумуляторов он идеально подходит для городской езды.",
+    yuanupDescription: "BYD Yuan UP — это универсальный кроссовер, который сочетает практичность внедорожника с эффективностью электрической силовой установки.",
+    sealion07Description: "BYD Sealion 07 построен с нуля как электрический внедорожник, с высокопрочной архитектурой и расположенным в полу аккумуляторным блоком для невероятной защиты пассажиров.",
+
+    // Car trims
+    active: "Active",
+    luxe: "Luxe",
+    comfort: "Comfort",
+    flagship: "Flagship",
+    flying: "Flying",
+    luxury: "Luxury",
+
+    // Currency
+    uzs: "сум",
     // Car types
     hybrid: "Гибрид",
     electric: "Электро",
@@ -168,12 +299,13 @@ export const translations = {
     phoneNumber: "Номер телефона",
     preferredDate: "Предпочитаемая дата",
     preferredTime: "Предпочитаемое время",
-    selectTime: "Выберите время",
     cancel: "Отмена",
     scheduleTestDrive: "Записаться на тест-драйв",
     submitting: "Отправка...",
     submitError: "Произошла ошибка. Попробуйте еще раз.",
     submitSuccess: "Успешно отправлено! Мы скоро свяжемся с вами.",
+    selectDate: "Выберите дату",
+    selectTime: "Выберите время",
     // Checkout Modal
     checkoutTitle: "Покупка",
     personalInfo: "Личная информация",

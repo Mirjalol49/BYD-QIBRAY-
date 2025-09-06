@@ -10,7 +10,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
     name: '',
     phone: '',
     date: null, // Change to null for DatePicker
-    time: ''
+    time: '' // Re-add time for separate selection
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
@@ -33,7 +33,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   const sendToTelegram = async (data) => {
     const botToken = '8378416167:AAGB5aQB0S0ddcsX1mzCvSxmCYEjKrvlYvA'
     // Use your personal chat ID or group chat ID instead of channel username
-    const chatId = '1234567890' // Replace with your actual chat ID
+    const chatId = '1907166652' // Replace with your actual chat ID
     
     const message = `🚗 *TEST DRIVE SO'ROVI*
 
@@ -90,7 +90,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
     try {
       const result = await sendToTelegram({
         ...formData,
-        date: formData.date ? formData.date.toISOString().split('T')[0] : '' // Format date for Telegram
+        date: formData.date ? formData.date.toLocaleDateString('uz-UZ') : '' // Format date for Telegram
       })
       
       if (result.success) {
@@ -113,6 +113,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   const getTomorrowDate = () => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
+    tomorrow.setHours(9, 0, 0, 0) // Set default time to 09:00 for minDate
     return tomorrow // Return Date object for DatePicker
   }
 
@@ -184,11 +185,9 @@ const TestDriveModal = ({ isOpen, onClose }) => {
                   onChange={handleDateChange}
                   className="form-input"
                   placeholderText={t('selectDate')}
-                  dateFormat="yyyy/MM/dd"
+                  dateFormat="MM/dd/yyyy"
                   minDate={getTomorrowDate()}
                   required
-                  calendarClassName="react-datepicker-custom"
-                  dayClassName={() => "react-datepicker-day-custom"}
                 />
               </div>
 
