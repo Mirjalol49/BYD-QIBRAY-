@@ -23,14 +23,14 @@
   right: 0;
   width: 500px;
   height: 100vh;
-  background: #1f1f1f;
-  color: white;
+  background: var(--panel-2);
+  color: var(--text);
   z-index: 1999;
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
-  border-left: 1px solid #333333;
+  border-left: 1px solid var(--border);
 }
 
 .car-details-panel.open {
@@ -41,52 +41,65 @@
   transform: translateX(100%);
 }
 
-/* Close Button */
-.car-details-close {
+/* Back Button */
+.back-button {
   position: absolute;
   top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  left: 20px;
+  background: #c4ff02; /* Requested brand color */
   border: none;
-  color: white;
-  font-size: 28px;
+  color: #000;
+  font-size: 24px;
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  padding: 8px;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   z-index: 10;
+  box-shadow: 0 8px 24px rgba(196, 255, 2, 0.25);
 }
 
-.car-details-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
+.back-button:hover {
+  background: #b8f000;
+  transform: translateX(-2px);
+}
+
+.back-button img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: invert(1) brightness(0.1);
 }
 
 /* Car Image Container */
 .car-details-image-container {
   position: relative;
   width: 100%;
-  height: 250px;
-  background: linear-gradient(45deg, #f0f0f0, #ffffff);
-  border-radius: 0 0 20px 20px;
+  height: 300px;
+  background: var(--panel-2); /* Match card background */
+  border-radius: 20px; /* Same rounded corners on all sides */
+  margin-top: 70px; /* Space under header/back button */
   margin-bottom: 20px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px; /* Keep image from touching edges */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .car-details-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  object-fit: contain; /* Ensure full image is visible */
+  border-radius: 20px; /* Round image corners */
 }
 
 .car-details-image:hover {
-  transform: scale(1.05);
 }
 
 /* Content Area */
@@ -101,7 +114,7 @@
   align-items: flex-start;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border);
 }
 
 .car-title-section {
@@ -112,7 +125,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin: 0 0 8px 0;
-  color: #ffffff;
+  color: var(--text);
 }
 
 .car-details-type {
@@ -127,37 +140,39 @@
 
 .car-price-section {
   text-align: left;
-  margin-top: 20px;
-  font-size: 1.1rem; /* Slightly smaller font for the list */
+  margin-top: 15px;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Space between price items */
 }
 
 .price-item {
-  margin-bottom: 10px; /* Space between each price entry */
+  margin-bottom: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap; /* Allow wrapping if space is too constrained, but try to keep together */
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+  justify-content: flex-start; /* Align to start */
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: none;
 }
 
 .price-item:last-child {
-  border-bottom: none;
   margin-bottom: 0;
 }
 
 .price-value {
-  font-size: 1.1rem; /* Adjust to fit on one line */
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: #c4ff00;
-  white-space: nowrap; /* Prevent price from breaking */
+  white-space: normal; /* Allow price to wrap */
+  word-break: break-word; /* Force break long words if necessary */
 }
 
 .price-period {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #aaa;
-  margin-left: 10px;
-  white-space: nowrap;
+  margin-left: 5px;
+  white-space: normal;
 }
 
 /* Car Specifications */
@@ -204,14 +219,14 @@
 
 .spec-label {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--muted);
   font-weight: 400;
 }
 
 .spec-value {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text);
 }
 
 /* Description */
@@ -236,7 +251,7 @@
   gap: 15px;
   margin-top: 30px;
   padding-top: 25px;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--border);
 }
 
 .contact-button {
@@ -390,7 +405,7 @@
   }
 
   .price-value {
-    font-size: 1.6rem;
+    font-size: 1.05rem; /* Ensure it stays manageable on very small screens */
   }
 }
 
@@ -410,4 +425,47 @@
 
 .car-details-panel::-webkit-scrollbar-thumb:hover {
   background: #777;
+}
+
+/* Light mode overrides */
+[data-theme="light"] .car-details-panel {
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .car-details-panel::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+[data-theme="light"] .car-details-panel::-webkit-scrollbar-thumb {
+  background: #dee2e6;
+}
+
+[data-theme="light"] .car-details-panel::-webkit-scrollbar-thumb:hover {
+  background: #adb5bd;
+}
+
+[data-theme="light"] .spec-item {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .spec-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .car-description {
+  background: rgba(196, 255, 2, 0.08);
+  border-left: 3px solid #c4ff00;
+}
+
+[data-theme="light"] .contact-button {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: var(--text);
+}
+
+[data-theme="light"] .contact-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
 }

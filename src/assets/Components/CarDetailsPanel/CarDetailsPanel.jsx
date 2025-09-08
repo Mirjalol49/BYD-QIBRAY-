@@ -1,4 +1,5 @@
 import React from 'react'
+import BackIcon from '../../Images/back.svg'
 import { useLanguage } from '../../../context/LanguageContext'
 import './CarDetailsPanel.css'
 
@@ -16,11 +17,11 @@ const CarDetailsPanel = ({ car, isOpen, onClose, onBuyClick }) => {
       
       {/* Details Panel */}
       <div className={`car-details-panel ${isOpen ? 'open' : 'closed'}`}>
-        {/* Close Button */}
-        <button className="car-details-close" onClick={onClose} aria-label="Close details">
-          ×
+        {/* Back Button */}
+        <button className="back-button" onClick={onClose} aria-label="Back to cars">
+          <img src={BackIcon} alt="Back" />
         </button>
-
+        
         {/* Car Image */}
         <div className="car-details-image-container">
           <img src={car.img} alt={car.title} className="car-details-image" />

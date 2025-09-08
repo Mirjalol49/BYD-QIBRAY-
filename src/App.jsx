@@ -17,11 +17,23 @@ import YuanUpImage from './assets/Images/yuanup.jpg'
 import Sealion07Image from './assets/Images/sealion7.jpg'
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false)
   const [selectedCar, setSelectedCar] = useState(null)
   const [isCarDetailsOpen, setIsCarDetailsOpen] = useState(false)
   const [isTestDriveOpen, setIsTestDriveOpen] = useState(false)
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
   const [currentLanguage, setCurrentLanguage] = useState('uz')
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const handleCarSelect = (car) => {
     setSelectedCar(car)
@@ -191,7 +203,7 @@ function App() {
   return (
     <LanguageContext.Provider value={languageContextValue}>
       <div className='app'>
-        <Sidebar onTestDriveClick={handleOpenTestDrive} />
+        <Sidebar isMobile={isMobile} onTestDriveClick={handleOpenTestDrive} />
         <div className="content">
           <Main 
             onCarSelect={handleCarSelect} 
