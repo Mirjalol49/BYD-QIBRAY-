@@ -27,24 +27,20 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
     // Use your personal chat ID or group chat ID instead of channel username
     const chatId = '1907166652' // Replace with your actual chat ID
     
-    const message = `💰 *YANGI SOTIB OLISH SO'ROVI*
-
-🚗 *Avtomobil ma'lumotlari:*
-▫️ Model: ${carInfo?.title || 'BYD'}
-▫️ Tur: ${carInfo?.type || 'Elektr'}
-▫️ Narx: ${carInfo?.prices && carInfo.prices.length > 0 ? `${carInfo.prices[0].value} ${t('uzs')}` : t('N/A')}
-
-👤 *Mijoz ma'lumotlari:*
-▫️ Ism: ${data.name}
-▫️ Telefon: ${data.phone}
-▫️ Manzil: ${data.address || 'Belgilanmagan'}
-
-📝 *Qo'shimcha izohlar:*
-${data.notes || 'Izoh yo\'q'}
-
-📅 *So'rov vaqti:* ${new Date().toLocaleString('uz-UZ')}
-
-🎯 *Harakat:* Mijoz bilan bog'lanib, sotib olish jarayonini boshlang!`
+    const message =
+      `<b>🧾 YANGI SOTIB OLISH SO'ROVI</b>\n\n` +
+      `🚘 <b>Avtomobil ma'lumotlari</b>\n` +
+      `• Model: ${carInfo?.title || 'BYD'}\n` +
+      `• Tur: ${carInfo?.type || 'Elektr'}\n` +
+      `• Narx: ${carInfo?.prices && carInfo.prices.length > 0 ? `${carInfo.prices[0].value} ${t('uzs')}` : t('N/A')}\n\n` +
+      `👤 <b>Mijoz ma'lumotlari</b>\n` +
+      `• Ism: ${data.name}\n` +
+      `• Telefon: ${data.phone}\n` +
+      `• Manzil: ${data.address || 'Belgilanmagan'}\n\n` +
+      `📝 <b>Qo'shimcha izohlar</b>\n` +
+      `${data.notes || "Izoh yo'q"}\n\n` +
+      `📅 <b>So'rov vaqti</b>: ${new Date().toLocaleString('uz-UZ')}\n` +
+      `🎯 <b>Harakat</b>: Mijoz bilan bog'lanib, sotib olish jarayonini boshlang.`
 
     try {
       console.log('Sending to Telegram:', { chatId, message }) // Debug log
@@ -57,7 +53,7 @@ ${data.notes || 'Izoh yo\'q'}
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'Markdown'
+          parse_mode: 'HTML'
         })
       })
 
@@ -117,7 +113,6 @@ ${data.notes || 'Izoh yo\'q'}
       <div className="checkout-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">
-            <span className="modal-icon">💰</span>
             {t('checkoutTitle')}
           </h2>
           <button className="modal-close" onClick={onClose}>
@@ -146,7 +141,6 @@ ${data.notes || 'Izoh yo\'q'}
           <form onSubmit={handleSubmit} className="checkout-form">
             <div className="form-section">
               <h4 className="section-title">
-                <span className="section-icon">👤</span>
                 {t('personalInfo')}
               </h4>
               
@@ -205,7 +199,6 @@ ${data.notes || 'Izoh yo\'q'}
             <div className="form-section">
               <div className="form-group">
                 <label htmlFor="notes" className="form-label">
-                  <span className="label-icon">📝</span>
                   {t('additionalNotes')}
                 </label>
                 <textarea
@@ -222,14 +215,12 @@ ${data.notes || 'Izoh yo\'q'}
 
             {submitStatus === 'error' && (
               <div className="status-message error">
-                <span className="status-icon">❌</span>
                 {t('submitError')}
               </div>
             )}
 
             {submitStatus === 'success' && (
               <div className="status-message success">
-                <span className="status-icon">✅</span>
                 {t('purchaseSuccess')}
               </div>
             )}
@@ -255,7 +246,6 @@ ${data.notes || 'Izoh yo\'q'}
                   </>
                 ) : (
                   <>
-                    <span className="btn-icon">💰</span>
                     {t('submitPurchase')}
                   </>
                 )}

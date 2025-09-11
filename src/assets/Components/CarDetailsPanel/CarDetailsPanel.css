@@ -340,11 +340,14 @@
 }
 
 .car-features li::before {
-  content: '✓';
+  content: '';
   position: absolute;
   left: 0;
-  color: #c4ff00;
-  font-weight: bold;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #c4ff00;
 }
 
 /* Responsive Design */

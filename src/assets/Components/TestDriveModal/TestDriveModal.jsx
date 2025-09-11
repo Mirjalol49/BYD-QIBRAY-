@@ -35,17 +35,15 @@ const TestDriveModal = ({ isOpen, onClose }) => {
     // Use your personal chat ID or group chat ID instead of channel username
     const chatId = '1907166652' // Replace with your actual chat ID
     
-    const message = `🚗 *TEST DRIVE SO'ROVI*
-
-👤 *Mijoz ma'lumotlari:*
-▫️ Ism: ${data.name}
-▫️ Telefon: ${data.phone}
-▫️ Sana: ${data.date}
-▫️ Vaqt: ${data.time}
-
-📅 *So'rov vaqti:* ${new Date().toLocaleString('uz-UZ')}
-
-🎯 *Harakat:* Test drive uchun mijoz bilan bog'laning!`
+    const message =
+      `<b>🚗 TEST DRIVE SO'ROVI</b>\n\n` +
+      `👤 <b>Mijoz ma'lumotlari</b>\n` +
+      `• Ism: ${data.name}\n` +
+      `• Telefon: ${data.phone}\n` +
+      `• Sana: ${data.date}\n` +
+      `• Vaqt: ${data.time}\n\n` +
+      `📅 <b>So'rov vaqti</b>: ${new Date().toLocaleString('uz-UZ')}\n` +
+      `🎯 <b>Harakat</b>: Test drive uchun mijoz bilan bog'laning.`
 
     try {
       console.log('Sending to Telegram:', { chatId, message }) // Debug log
@@ -58,7 +56,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'Markdown'
+          parse_mode: 'HTML'
         })
       })
 
@@ -124,7 +122,6 @@ const TestDriveModal = ({ isOpen, onClose }) => {
       <div className="test-drive-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">
-            <span className="modal-icon">🚗</span>
             {t('testDriveTitle')}
           </h2>
           <button className="modal-close" onClick={onClose}>
@@ -140,7 +137,6 @@ const TestDriveModal = ({ isOpen, onClose }) => {
           <form onSubmit={handleSubmit} className="test-drive-form">
             <div className="form-group">
               <label htmlFor="name" className="form-label">
-                <span className="label-icon">👤</span>
                 {t('fullName')}
               </label>
               <input
@@ -157,7 +153,6 @@ const TestDriveModal = ({ isOpen, onClose }) => {
 
             <div className="form-group">
               <label htmlFor="phone" className="form-label">
-                <span className="label-icon">📱</span>
                 {t('phoneNumber')}
               </label>
               <input
@@ -175,7 +170,6 @@ const TestDriveModal = ({ isOpen, onClose }) => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="date" className="form-label">
-                  <span className="label-icon">📅</span>
                   {t('preferredDate')}
                 </label>
                 <DatePicker
@@ -193,7 +187,6 @@ const TestDriveModal = ({ isOpen, onClose }) => {
 
               <div className="form-group">
                 <label htmlFor="time" className="form-label">
-                  <span className="label-icon">⏰</span>
                   {t('preferredTime')}
                 </label>
                 <select
@@ -220,14 +213,14 @@ const TestDriveModal = ({ isOpen, onClose }) => {
 
             {submitStatus === 'error' && (
               <div className="status-message error">
-                <span className="status-icon">❌</span>
+                <span className="status-icon" aria-hidden="true"></span>
                 {t('submitError')}
               </div>
             )}
 
             {submitStatus === 'success' && (
               <div className="status-message success">
-                <span className="status-icon">✅</span>
+                <span className="status-icon" aria-hidden="true"></span>
                 {t('submitSuccess')}
               </div>
             )}
@@ -253,7 +246,6 @@ const TestDriveModal = ({ isOpen, onClose }) => {
                   </>
                 ) : (
                   <>
-                    <span className="btn-icon">🚗</span>
                     {t('scheduleTestDrive')}
                   </>
                 )}
