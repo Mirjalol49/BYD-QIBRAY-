@@ -37,7 +37,7 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
       id: 'location',
       icon: (<img src={LocationIcon} alt="Location icon" />), 
       label: t('location'), 
-      href: "https://yandex.uz/maps/org/92414484048/?ll=69.456601%2C41.391577&z=14.29" 
+      href: "https://maps.app.goo.gl/3YsgAwRTRTYKyEqH7" 
     },
     { 
       id: 'testdrive',
