@@ -11,8 +11,8 @@ import CallIcon from "../../Images/call.svg"
 import "./Sidebar.css"
 
 const Sidebar = ({ isMobile, onTestDriveClick }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false) // For desktop expand/collapse (if desired later)
-  const [isMobileOpen, setIsMobileOpen] = useState(false) // For mobile open/close
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState({})
   const [isLanguageOpen, setIsLanguageOpen] = useState(false)
   const { currentLanguage, changeLanguage, t } = useLanguage()
@@ -71,6 +71,11 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
     { code: 'ru', label: 'Русский', flag: '🇷🇺' }
   ]
 
+  const phoneNumbers = [
+    { number: t('companyPhoneNumber'), primary: false },
+    { number: t('companySecondPhoneNumber'), primary: true },
+  ]
+
   return (
     <>
       {/* Mobile Hamburger Button */}
@@ -86,90 +91,90 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
         </button>
       )}
 
-        {/* Sidebar */}
-        <div className={`professional-sidebar ${
-          isMobile
-            ? (isMobileOpen ? 'mobile-open' : 'mobile-closed')
-            : 'desktop-open' // Always open on desktop for now
-        }`}>
-          
-          {/* Header with Logo and Brand */}
-          <div className="sidebar-header">
-            <div className="sidebar-brand">
-              <div className="brand-icon">
-                <img src={Logo} alt="BYD Logo" />
+      {/* Sidebar */}
+      <div className={`professional-sidebar ${
+        isMobile
+          ? (isMobileOpen ? 'mobile-open' : 'mobile-closed')
+          : 'desktop-open'
+      }`}>
+        
+        {/* Header with Logo and Brand */}
+        <div className="sidebar-header">
+          <div className="sidebar-brand">
+            <div className="brand-icon">
+              <img src={Logo} alt="BYD Logo" />
+            </div>
+            <span className="brand-name">BYD QIBRAY</span>
+          </div>
+        </div>
+
+        {/* Menu Items */}
+        <div className="menu-section">
+          <nav className="menu-items">
+            {menuItems.map((item) => (
+              <div key={item.id} className="menu-item-wrapper">
+                {item.id === 'testdrive' ? (
+                  <button 
+                    onClick={onTestDriveClick} 
+                    className="menu-item menu-button"
+                  >
+                    <div className="menu-icon">
+                      {item.icon}
+                    </div>
+                    <span className="menu-label">{item.label}</span>
+                  </button>
+                ) : (
+                  <a href={item.href} className="menu-item" target="_blank" rel="noopener noreferrer">
+                    <div className="menu-icon">
+                      {item.icon}
+                    </div>
+                    <span className="menu-label">{item.label}</span>
+                  </a>
+                )}
               </div>
-              <span className="brand-name">BYD QIBRAY</span>
-            </div>
-          </div>
-
-          {/* Menu Items */}
-          <div className="menu-section">
-            <nav className="menu-items">
-              {menuItems.map((item) => (
-                <div key={item.id} className="menu-item-wrapper">
-                  {item.id === 'testdrive' ? (
-                    <button 
-                      onClick={onTestDriveClick} 
-                      className="menu-item menu-button"
-                    >
-                      <div className="menu-icon">
-                        {item.icon}
-                      </div>
-                      <span className="menu-label mobile-visible-text">{item.label}</span>
-                    </button>
-                  ) : (
-                    <a href={item.href} className="menu-item" target="_blank" rel="noopener noreferrer">
-                      <div className="menu-icon">
-                        {item.icon}
-                      </div>
-                      <span className="menu-label mobile-visible-text">{item.label}</span>
-                    </a>
-                  )}
-                </div>
-              ))}
-            </nav>
-          </div>
-
-        {/* Promotional Hook */}
-        <div className="promo-hook">
-          <div className="promo-card">
-            <div className="promo-info">
-              <span className="promo-eyebrow">Special Offer</span>
-              <div className="promo-text">{t('promoText')}</div>
-            </div>
-            <div className="promo-cta">
-              <button className="promo-btn" onClick={onTestDriveClick}>
-                <span className="promo-btn-label">{t('testDrive')}</span>
-              </button>
-            </div>
-          </div>
+            ))}
+          </nav>
         </div>
 
         {/* Contact Information */}
         <div className="contact-info">
-          <div className="phone-number">
-            <img className="phone-icon" src={CallIcon} alt="Phone" />
-            <a href={`tel:${t('companyPhoneNumber')}`}>{t('companyPhoneNumber')}</a>
+          <div className="contact-header">
+            <img className="contact-header-icon" src={CallIcon} alt="Contact" />
+            <span className="contact-title">{t('contactUs')}</span>
+          </div>
+          <div className="phone-numbers">
+            {phoneNumbers.map((phone, index) => (
+              <div key={index} className={`phone-number ${phone.primary ? 'primary' : 'secondary'}`}>
+                <a href={`tel:${phone.number.replace(/\s/g, '')}`}>
+                  {phone.number}
+                </a>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Social Media Links */}
         <div className="social-links">
-          {socialLinks.map((social, index) => (
-            <a
-              key={index}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              title={social.name}
-            >
-              <div className="social-icon">
-                <img src={social.iconSrc} alt={`${social.name} icon`} />
-              </div>
-            </a>
-          ))}
+          <div className="social-header">
+            <span className="social-title">{t('followUs')}</span>
+          </div>
+          <div className="social-icons">
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+                title={social.name}
+              >
+                <div className="social-icon">
+                  <img src={social.iconSrc} alt={`${social.name} icon`} />
+                </div>
+                <span className="social-name">{social.name}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Language Switcher */}
@@ -179,9 +184,10 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
               <span className="language-flag">
                 {languages.find(lang => lang.code === currentLanguage)?.flag}
               </span>
-              <span className="language-name mobile-visible-text">
+              <span className="language-name">
                 {languages.find(lang => lang.code === currentLanguage)?.label}
               </span>
+              <span className="language-arrow">▼</span>
             </div>
             
             <div className="language-dropdown">
@@ -192,16 +198,14 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
                   onClick={() => { changeLanguage(lang.code); setIsLanguageOpen(false); }}
                 >
                   <span className="language-flag">{lang.flag}</span>
-                  <span className="language-label mobile-visible-text">{lang.label}</span>
+                  <span className="language-label">{lang.label}</span>
                 </button>
               ))}
             </div>
           </div>
         </div>
-
-        
-
       </div>
+
       {/* Mobile Overlay */}
       {isMobile && isMobileOpen && (
         <div className="mobile-overlay" onClick={toggleMobileSidebar}></div>

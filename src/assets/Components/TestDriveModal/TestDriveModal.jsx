@@ -14,6 +14,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [showValidationErrors, setShowValidationErrors] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -31,10 +32,6 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   }
 
   const sendToTelegram = async (data) => {
-    const botToken = '8378416167:AAGB5aQB0S0ddcsX1mzCvSxmCYEjKrvlYvA'
-    // Use your personal chat ID or group chat ID instead of channel username
-    const chatId = '1907166652' // Replace with your actual chat ID
-    
     const message =
       `<b>🚗 TEST DRIVE SO'ROVI</b>\n\n` +
       `👤 <b>Mijoz ma'lumotlari</b>\n` +
@@ -46,30 +43,30 @@ const TestDriveModal = ({ isOpen, onClose }) => {
       `🎯 <b>Harakat</b>: Test drive uchun mijoz bilan bog'laning.`
 
     try {
-      console.log('Sending to Telegram:', { chatId, message }) // Debug log
-      
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      console.log('Sending to Telegram via backend')
+
+      const backendApiUrl = import.meta.env.VITE_BACKEND_API_URL || '';
+      const response = await fetch(`${backendApiUrl}/api/telegram/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'HTML'
+          message,
+          parseMode: 'HTML'
         })
       })
 
       const result = await response.json()
-      console.log('Telegram API Response:', result) // Debug log
+      console.log('Telegram backend response:', result)
 
       if (response.ok && result.ok) {
         return { success: true }
       } else {
-        throw new Error(result.description || 'Failed to send message')
+        throw new Error(result.error || 'Failed to send message')
       }
     } catch (error) {
-      console.error('Telegram API Error:', error)
+      console.error('Telegram send error:', error)
       return { success: false, error: error.message }
     }
   }
@@ -79,11 +76,13 @@ const TestDriveModal = ({ isOpen, onClose }) => {
     
     if (!formData.name || !formData.phone || !formData.date || !formData.time) {
       setSubmitStatus('error')
+      setShowValidationErrors(true) // Show validation errors
       return
     }
 
     setIsSubmitting(true)
     setSubmitStatus(null)
+    setShowValidationErrors(false) // Hide validation errors on successful submission attempt
 
     try {
       const result = await sendToTelegram({
@@ -145,7 +144,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="form-input"
+                className={`form-input ${(showValidationErrors && !formData.name) ? 'invalid' : ''}`}
                 placeholder={t('fullNamePlaceholder')}
                 required
               />
@@ -161,7 +160,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="form-input"
+                className={`form-input ${(showValidationErrors && !formData.phone) ? 'invalid' : ''}`}
                 placeholder="+998 __ ___ __ __"
                 required
               />
@@ -177,7 +176,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
                   name="date"
                   selected={formData.date}
                   onChange={handleDateChange}
-                  className="form-input"
+                  className={`form-input ${(showValidationErrors && !formData.date) ? 'invalid' : ''}`}
                   placeholderText={t('selectDate')}
                   dateFormat="MM/dd/yyyy"
                   minDate={getTomorrowDate()}
@@ -194,7 +193,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
                   name="time"
                   value={formData.time}
                   onChange={handleInputChange}
-                  className="form-input"
+                  className={`form-input ${(showValidationErrors && !formData.time) ? 'invalid' : ''}`}
                   required
                 >
                   <option value="">{t('selectTime')}</option>

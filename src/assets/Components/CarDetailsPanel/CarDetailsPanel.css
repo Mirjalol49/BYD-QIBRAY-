@@ -248,10 +248,47 @@
 /* Action Buttons */
 .car-actions {
   display: flex;
-  gap: 15px;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 30px;
   padding-top: 25px;
   border-top: 1px solid var(--border);
+}
+
+/* Phone Numbers */
+.phone-numbers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.phone-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.phone-number svg {
+  width: 16px;
+  height: 16px;
+  color: #c4ff00;
+  flex-shrink: 0;
+}
+
+.phone-number a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.phone-number a:hover {
+  color: #c4ff00;
 }
 
 .contact-button {

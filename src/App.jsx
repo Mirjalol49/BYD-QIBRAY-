@@ -85,9 +85,12 @@ function App() {
       type: 'Hybrid',
       img: ChazorImage,
       description: t('chazorDescription'),
-      range: '700 km',
-      acceleration: '7.3 s',
+      range: '1245 km', // Общий запас хода
+      acceleration: '7.9 s', // Разгон до 100 км/ч
       topSpeed: '180 km/h',
+      fuelConsumption: '3.8 l', // ВСЕГО 3,8 Л Расход на 100 км
+      chargingTime: '30 Min (120 kW/h)', // Время зарядки от 30-80% (120 кВт/ч)
+      electronicAssistants: '18 Systems', // 18 СИСТЕМ Электронных помощников
       prices: [
         { range: '55 km Active', value: '273 900 000' },
         { range: '55 km Luxe', value: '288 100 000' },
@@ -102,7 +105,7 @@ function App() {
       img: SongProImage,
       description: t('songproDescription'),
       range: '1100 km',
-      acceleration: '6.5 s',
+      acceleration: '8.3 s',
       topSpeed: '180 km/h',
       prices: [
         { range: '71 km Comfort', value: '321 800 000' },
@@ -117,7 +120,7 @@ function App() {
       img: SongPlusDMiChampionImage,
       description: t('songplusdmichampionDescription'),
       range: '1200 km',
-      acceleration: '5.9 s',
+      acceleration: '8.3 s',
       topSpeed: '180 km/h',
       prices: [
         { range: '110 km Flagship', value: '387 200 000' },
@@ -131,10 +134,10 @@ function App() {
       img: SongPlusEVChampionImage,
       description: t('songplusevchampionDescription'),
       range: '605 km',
-      acceleration: '4.9 s',
+      acceleration: '8.5 s',
       topSpeed: '180 km/h',
       prices: [
-        { range: '520 km Flagship', value: '395 300 000' },
+        { range: '520 km Flagship', value: '423 400 000' },
         { range: '605 km Flagship', value: '402 500 000' },
       ],
     },
@@ -145,7 +148,7 @@ function App() {
       img: SeagullImage,
       description: t('seagullDescription'),
       range: '405 km',
-      acceleration: '3.9 s',
+      acceleration: '4.9 s',
       topSpeed: '130 km/h',
       prices: [
         { range: '405 km Flying', value: '208 300 000' },
@@ -158,7 +161,7 @@ function App() {
       img: E2Image,
       description: t('e2Description'),
       range: '405 km',
-      acceleration: '4.5 s',
+      acceleration: '4.9 s',
       topSpeed: '130 km/h',
       prices: [
         { range: '405 km Luxury', value: '236 600 000' },

@@ -139,10 +139,6 @@
   color: #888888;
 }
 
-.form-input:invalid {
-  border-color: #ef4444;
-}
-
 /* Status Messages */
 .status-message {
   display: flex;

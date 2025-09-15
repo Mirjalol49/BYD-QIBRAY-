@@ -23,10 +23,6 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
   }
 
   const sendToTelegram = async (data, carInfo) => {
-    const botToken = '8378416167:AAGB5aQB0S0ddcsX1mzCvSxmCYEjKrvlYvA'
-    // Use your personal chat ID or group chat ID instead of channel username
-    const chatId = '1907166652' // Replace with your actual chat ID
-    
     const message =
       `<b>🧾 YANGI SOTIB OLISH SO'ROVI</b>\n\n` +
       `🚘 <b>Avtomobil ma'lumotlari</b>\n` +
@@ -43,30 +39,30 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
       `🎯 <b>Harakat</b>: Mijoz bilan bog'lanib, sotib olish jarayonini boshlang.`
 
     try {
-      console.log('Sending to Telegram:', { chatId, message }) // Debug log
-      
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      console.log('Sending to Telegram via backend')
+
+      const backendApiUrl = import.meta.env.VITE_BACKEND_API_URL || '';
+      const response = await fetch(`${backendApiUrl}/api/telegram/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'HTML'
+          message,
+          parseMode: 'HTML'
         })
       })
 
       const result = await response.json()
-      console.log('Telegram API Response:', result) // Debug log
+      console.log('Telegram backend response:', result)
 
       if (response.ok && result.ok) {
         return { success: true }
       } else {
-        throw new Error(result.description || 'Failed to send message')
+        throw new Error(result.error || 'Failed to send message')
       }
     } catch (error) {
-      console.error('Telegram API Error:', error)
+      console.error('Telegram send error:', error)
       return { success: false, error: error.message }
     }
   }

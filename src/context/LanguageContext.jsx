@@ -24,6 +24,9 @@ export const translations = {
     price: "Narx",
     buyButton: "Sotib olish",
     keyFeatures: "Asosiy xususiyatlar",
+    fuelConsumption: "Foydalanish",
+    chargingTime: "Zaryadlash vaqti",
+    electronicAssistants: "Elektron yordamchilar",
     features: [
       "Avtopilot tizimi",
       "Premium ichki materiallar", 
@@ -43,6 +46,7 @@ export const translations = {
     purchase: "Xarid",
     descriptionFallback: "keskin texnologiyalar va ajoyib ishlashni birlashtiradi. Yuqori sifatli materiallar va ilg'or xavfsizlik funksiyalari bilan qurilgan bo'lib, eng yaxshi haydash tajribasini ta'minlaydi.",
     companyPhoneNumber: "+998 55 900 88 08",
+    companySecondPhoneNumber: "+998 55 555 88 08",
 
     // Car models
     chazor: "CHAZOR",
@@ -53,6 +57,22 @@ export const translations = {
     e2: "E2",
     yuanup: "YUAN UP",
     sealion07: "SEALION 07",
+
+    // Price range labels
+    "55 km Active": "55 km Active",
+    "55 km Luxe": "55 km Luxe",
+    "120 km Comfort": "120 km Comfort",
+    "120 km Flagship": "120 km Flagship",
+    "71 km Comfort": "71 km Comfort",
+    "71 km Flagship": "71 km Flagship",
+    "110 km Flagship": "110 km Flagship",
+    "520 km Flagship": "520 km Flagship",
+    "605 km Flagship": "605 km Flagship",
+    "405 km Flying": "405 km Flying",
+    "405 km Luxury": "405 km Luxury",
+    "401 km Luxury": "401 km Luxury",
+    "451 km Flagship": "451 km Flagship",
+    "503 km Flagship": "503 km Flagship",
 
     // Car descriptions
     chazorDescription: "BYD Chazor yuqori sifatli gibrid texnologiyasini hashamatli qulaylik bilan birlashtiradi. Ishlashdan voz kechmasdan samaradorlikni qadrlaydigan zamonaviy haydovchi uchun yaratilgan.",
@@ -74,9 +94,6 @@ export const translations = {
     
     // Currency
     uzs: "so'm",
-    // Car types
-    hybrid: "Gibrid",
-    electric: "Elektr",
     // Test Drive Modal
     testDriveTitle: "Test Drive buyurtma berish",
     testDriveDescription: "BYD avtomobilini sinab ko'rish uchun quyidagi ma'lumotlarni to'ldiring. Bizning mutaxassislarimiz siz bilan bog'lanishadi.",
@@ -110,7 +127,10 @@ export const translations = {
     additionalNotes: "Qo'shimcha izohlar",
     notesPlaceholder: "Qo'shimcha talablar yoki izohlaringizni yozing...",
     submitPurchase: "Sotib olish so'rovini yuborish",
-    purchaseSuccess: "Sotib olish so'rovi yuborildi! Tez orada siz bilan bog'lanamiz."
+    purchaseSuccess: "Sotib olish so'rovi yuborildi! Tez orada siz bilan bog'lanamiz.",
+    // Sidebar
+    contactUs: "Biz bilan bog'laning",
+    followUs: "Bizni kuzatib boring"
   },
   en: {
     // Sidebar
@@ -131,6 +151,9 @@ export const translations = {
     price: "Price",
     buyButton: "Buy",
     keyFeatures: "Key Features",
+    fuelConsumption: "Consumption",
+    chargingTime: "Charging Time",
+    electronicAssistants: "Electronic Assistants",
     features: [
       "Advanced autopilot system",
       "Premium interior materials",
@@ -150,6 +173,7 @@ export const translations = {
     purchase: "Purchase",
     descriptionFallback: "combines cutting-edge technology with exceptional performance. Built with premium materials and advanced safety features for the ultimate driving experience.",
     companyPhoneNumber: "+998 55 900 88 08",
+    companySecondPhoneNumber: "+998 55 555 88 08",
 
     // Car models
     chazor: "CHAZOR",
@@ -160,6 +184,22 @@ export const translations = {
     e2: "E2",
     yuanup: "YUAN UP",
     sealion07: "SEALION 07",
+
+    // Price range labels
+    "55 km Active": "55 km Active",
+    "55 km Luxe": "55 km Luxe",
+    "120 km Comfort": "120 km Comfort",
+    "120 km Flagship": "120 km Flagship",
+    "71 km Comfort": "71 km Comfort",
+    "71 km Flagship": "71 km Flagship",
+    "110 km Flagship": "110 km Flagship",
+    "520 km Flagship": "520 km Flagship",
+    "605 km Flagship": "605 km Flagship",
+    "405 km Flying": "405 km Flying",
+    "405 km Luxury": "405 km Luxury",
+    "401 km Luxury": "401 km Luxury",
+    "451 km Flagship": "451 km Flagship",
+    "503 km Flagship": "503 km Flagship",
 
     // Car descriptions
     chazorDescription: "The BYD Chazor combines cutting-edge hybrid technology with luxurious comfort. Built for the modern driver who values efficiency without compromising on performance.",
@@ -181,9 +221,6 @@ export const translations = {
 
     // Currency
     uzs: "UZS",
-    // Car types
-    hybrid: "Hybrid",
-    electric: "Electric",
     // Test Drive Modal
     testDriveTitle: "Schedule Test Drive",
     testDriveDescription: "Fill out the information below to test drive a BYD vehicle. Our specialists will contact you.",
@@ -217,7 +254,10 @@ export const translations = {
     additionalNotes: "Additional Notes",
     notesPlaceholder: "Write your additional requirements or comments...",
     submitPurchase: "Submit Purchase Request",
-    purchaseSuccess: "Purchase request submitted! We will contact you soon."
+    purchaseSuccess: "Purchase request submitted! We will contact you soon.",
+    // Sidebar
+    contactUs: "Contact Us",
+    followUs: "Follow Us"
   },
   ru: {
     // Sidebar
@@ -238,6 +278,9 @@ export const translations = {
     price: "Цена",
     buyButton: "Купить",
     keyFeatures: "Основные характеристики",
+    fuelConsumption: "Расход",
+    chargingTime: "Время зарядки",
+    electronicAssistants: "Электронные помощники",
     features: [
       "Система автопилота",
       "Премиальные материалы салона",
@@ -257,6 +300,7 @@ export const translations = {
     purchase: "Покупка",
     descriptionFallback: "сочетает в себе передовые технологии с исключительной производительностью. Созданный из высококачественных материалов и передовых функций безопасности для максимального удовольствия от вождения.",
     companyPhoneNumber: "+998 55 900 88 08",
+    companySecondPhoneNumber: "+998 55 555 88 08",
 
     // Car models
     chazor: "CHAZOR",
@@ -267,6 +311,22 @@ export const translations = {
     e2: "E2",
     yuanup: "YUAN UP",
     sealion07: "SEALION 07",
+
+    // Price range labels
+    "55 km Active": "55 км Active",
+    "55 km Luxe": "55 км Luxe",
+    "120 km Comfort": "120 км Comfort",
+    "120 km Flagship": "120 км Flagship",
+    "71 km Comfort": "71 км Comfort",
+    "71 km Flagship": "71 км Flagship",
+    "110 km Flagship": "110 км Flagship",
+    "520 km Flagship": "520 км Flagship",
+    "605 km Flagship": "605 км Flagship",
+    "405 km Flying": "405 км Flying",
+    "405 km Luxury": "405 км Luxury",
+    "401 km Luxury": "401 км Luxury",
+    "451 km Flagship": "451 км Flagship",
+    "503 km Flagship": "503 км Flagship",
 
     // Car descriptions
     chazorDescription: "BYD Chazor сочетает передовые гибридные технологии с роскошным комфортом. Создан для современного водителя, который ценит эффективность без ущерба для производительности.",
@@ -288,9 +348,6 @@ export const translations = {
 
     // Currency
     uzs: "сум",
-    // Car types
-    hybrid: "Гибрид",
-    electric: "Электро",
     // Test Drive Modal
     testDriveTitle: "Записаться на тест-драйв",
     testDriveDescription: "Заполните информацию ниже, чтобы протестировать автомобиль BYD. Наши специалисты свяжутся с вами.",
@@ -324,7 +381,10 @@ export const translations = {
     additionalNotes: "Дополнительные заметки",
     notesPlaceholder: "Напишите ваши дополнительные требования или комментарии...",
     submitPurchase: "Отправить запрос на покупку",
-    purchaseSuccess: "Запрос на покупку отправлен! Мы скоро свяжемся с вами."
+    purchaseSuccess: "Запрос на покупку отправлен! Мы скоро свяжемся с вами.",
+    // Sidebar
+    contactUs: "Связаться с нами",
+    followUs: "Подписывайтесь на нас"
   }
 }
 
