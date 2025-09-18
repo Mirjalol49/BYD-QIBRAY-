@@ -5,10 +5,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.9);
   z-index: 1998;
   animation: fadeIn 0.3s ease;
-  backdrop-filter: blur(4px);
 }
 
 @keyframes fadeIn {
@@ -46,9 +45,9 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background: #c4ff02; /* Requested brand color */
+  background: var(--accent);
   border: none;
-  color: #000;
+  color: #ffffff;
   font-size: 24px;
   cursor: pointer;
   padding: 8px;
@@ -60,11 +59,11 @@
   justify-content: center;
   transition: all 0.2s ease;
   z-index: 10;
-  box-shadow: 0 8px 24px rgba(196, 255, 2, 0.25);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
 }
 
 .back-button:hover {
-  background: #b8f000;
+  background: var(--accent-hover);
   transform: translateX(-2px);
 }
 
@@ -72,7 +71,7 @@
   width: 24px;
   height: 24px;
   display: block;
-  filter: invert(1) brightness(0.1);
+  filter: invert(1) brightness(1);
 }
 
 /* Car Image Container */
@@ -130,8 +129,8 @@
 
 .car-details-type {
   font-size: 0.9rem;
-  color: #4a9eff;
-  background: rgba(74, 158, 255, 0.1);
+  color: var(--accent);
+  background: rgba(34, 197, 94, 0.1);
   padding: 4px 12px;
   border-radius: 15px;
   font-weight: 500;
@@ -163,7 +162,7 @@
 .price-value {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #c4ff00;
+  color: var(--accent);
   white-space: normal; /* Allow price to wrap */
   word-break: break-word; /* Force break long words if necessary */
 }
@@ -195,7 +194,7 @@
   background: rgba(255, 255, 255, 0.03);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .spec-item:hover {
@@ -235,7 +234,7 @@
   padding: 20px;
   background: rgba(255, 255, 255, 0.02);
   border-radius: 8px;
-  border-left: 3px solid #c4ff00;
+  border-left: 3px solid #22c55e;
 }
 
 .car-description p {
@@ -266,29 +265,37 @@
 .phone-number {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.phone-number:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
+  transform: translateY(-1px);
 }
 
 .phone-number svg {
-  width: 16px;
-  height: 16px;
-  color: #c4ff00;
+  width: 18px;
+  height: 18px;
+  color: #22c55e;
   flex-shrink: 0;
 }
 
 .phone-number a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .phone-number a:hover {
-  color: #c4ff00;
+  color: #22c55e;
 }
 
 .contact-button {
@@ -305,7 +312,7 @@
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-button:hover {
@@ -325,21 +332,22 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #c4ff00;
-  color: #000;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
   border: none;
   padding: 14px 20px;
   border-radius: 8px;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
 }
 
 .buy-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(196, 255, 0, 0.3);
-  background: #b8f000;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+  background: linear-gradient(135deg, #16a34a, #15803d);
 }
 
 .buy-button:active {
@@ -384,7 +392,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #c4ff00;
+  background-color: var(--accent);
 }
 
 /* Responsive Design */
@@ -469,43 +477,45 @@
 
 /* Light mode overrides */
 [data-theme="light"] .car-details-panel {
-  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+  background: var(--panel-2);
+  border-left: 1px solid var(--border);
 }
 
 [data-theme="light"] .car-details-panel::-webkit-scrollbar-track {
-  background: #f8f9fa;
+  background: var(--panel);
 }
 
 [data-theme="light"] .car-details-panel::-webkit-scrollbar-thumb {
-  background: #dee2e6;
+  background: var(--border);
 }
 
 [data-theme="light"] .car-details-panel::-webkit-scrollbar-thumb:hover {
-  background: #adb5bd;
+  background: var(--muted);
 }
 
 [data-theme="light"] .spec-item {
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="light"] .spec-item:hover {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 [data-theme="light"] .car-description {
-  background: rgba(196, 255, 2, 0.08);
-  border-left: 3px solid #c4ff00;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--accent);
 }
 
 [data-theme="light"] .contact-button {
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--text);
 }
 
 [data-theme="light"] .contact-button:hover {
-  background: rgba(0, 0, 0, 0.1);
-  border-color: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
 }

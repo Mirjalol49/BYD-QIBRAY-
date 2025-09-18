@@ -1,23 +1,23 @@
 :root {
-  --bg: #000000;
-  --panel: #1a1a1a;
-  --panel-2: #1f1f1f;
+  --bg: #0f0f0f; /* Deep dark background */
+  --panel: #1a1a1a; /* Dark panel */
+  --panel-2: #262626; /* Lighter dark panel */
   --text: #ffffff;
-  --muted: #cccccc;
-  --border: #333333;
-  --accent: #c4ff00;
-  --icon-filter: invert(1) brightness(1.4);
+  --muted: #a3a3a3;
+  --border: #404040;
+  --accent: #22c55e; /* Green primary */
+  --accent-hover: #16a34a;
 }
 
 [data-theme="light"] {
-  --bg: #f8f9fa;
-  --panel: #ffffff;
-  --panel-2: #f1f3f4;
-  --text: #1a1a1a;
-  --muted: #6c757d;
-  --border: #dee2e6;
-  --accent: #c4ff00; /* keep the brand green */
-  --icon-filter: invert(0.2) brightness(0.8);
+  --bg: #0f0f0f;
+  --panel: #1a1a1a;
+  --panel-2: #262626;
+  --text: #ffffff;
+  --muted: #a3a3a3;
+  --border: #404040;
+  --accent: #22c55e; /* Green primary */
+  
 }
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {

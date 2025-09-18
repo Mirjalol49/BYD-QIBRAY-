@@ -66,7 +66,7 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
   ]
 
   const languages = [
-    { code: 'uz', label: 'O\'zbekcha', flag: '🇺🇿' },
+    { code: 'uz', label: 'O\'zbek', flag: '🇺🇿' },
     { code: 'en', label: 'English', flag: '🇺🇸' },
     { code: 'ru', label: 'Русский', flag: '🇷🇺' }
   ]

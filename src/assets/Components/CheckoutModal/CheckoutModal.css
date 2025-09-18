@@ -1,6 +1,6 @@
 /* Checkout Modal Styles */
 .checkout-modal {
-  background: #1a1a1a;
+  background: var(--panel);
   border-radius: 20px;
   width: 90%;
   max-width: 600px;
@@ -8,19 +8,20 @@
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   animation: slideUp 0.3s ease;
-  border: 1px solid #333333;
+  border: 1px solid var(--border);
 }
 
 /* Car Summary */
 .car-summary {
-  background: linear-gradient(135deg, #c4ff00, #a8e000);
-  color: #000000;
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: #ffffff;
   padding: 20px 28px;
   margin-bottom: 24px;
   border-radius: 16px;
   display: flex; /* Added for layout */
   align-items: center; /* Vertically align items */
   gap: 20px; /* Space between image and details */
+  border: 1px solid var(--border);
 }
 
 .car-summary-image {
@@ -94,17 +95,17 @@
   padding: 14px 16px;
   border: 2px solid #333333;
   border-radius: 12px;
-  background: #2a2a2a;
+  background: var(--panel-2);
   color: #ffffff;
   font-size: 15px;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
 }
 
 .form-input:focus {
-  border-color: #c4ff00;
-  box-shadow: 0 0 0 3px rgba(196, 255, 0, 0.1);
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
 .form-input::placeholder {
@@ -120,19 +121,19 @@
   padding: 14px 16px;
   border: 2px solid #333333;
   border-radius: 12px;
-  background: #2a2a2a;
+  background: var(--panel-2);
   color: #ffffff;
   font-size: 15px;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
   resize: vertical; /* Only for textareas */
   min-height: 80px; /* Only for textareas */
 }
 
 .form-textarea:focus {
-  border-color: #c4ff00;
-  box-shadow: 0 0 0 3px rgba(196, 255, 0, 0.1);
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
 .form-textarea::placeholder {
@@ -155,7 +156,7 @@
 
 /* Payment Method Specific Styles */
 .form-input option {
-  background: #2a2a2a;
+  background: var(--panel-2);
   color: #ffffff;
   padding: 8px;
 }
@@ -184,22 +185,82 @@
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
+/* Loading Spinner */
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Enhanced Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #c4ff00, #a8e000);
-  color: #000000;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 4px 15px rgba(196, 255, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #a8e000, #8cc000);
+  background: linear-gradient(135deg, #16a34a, #15803d);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(196, 255, 0, 0.3);
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
 }
 
 .btn-primary:active {
   transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: var(--panel);
+  color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--panel-2);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Responsive Design */
