@@ -1,0 +1,196 @@
+/* Success Confetti Container */
+.success-confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Success Icon */
+.success-icon-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+  animation: successBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 32px rgba(79, 115, 179, 0.4);
+  position: relative;
+  z-index: 2;
+}
+
+.success-icon svg {
+  width: 40px;
+  height: 40px;
+  stroke-width: 3;
+}
+
+/* Success Ripple Effect */
+.success-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: ripple 1.5s ease-out infinite;
+}
+
+.success-ripple-delay {
+  animation-delay: 0.5s;
+}
+
+/* Confetti Particles */
+.confetti-particle {
+  position: absolute;
+  top: -10px;
+  opacity: 1;
+  animation: confettiFall linear infinite;
+}
+
+.confetti-circle {
+  border-radius: 50%;
+}
+
+.confetti-square {
+  border-radius: 2px;
+}
+
+/* Success Message */
+.success-message {
+  text-align: center;
+  animation: messageSlideUp 0.8s ease-out 0.3s both;
+}
+
+.success-message h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.success-message p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Animations */
+@keyframes successBounce {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes messageSlideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .success-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .success-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .success-ripple {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .success-message h3 {
+    font-size: 1.25rem;
+  }
+  
+  .success-message p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .success-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .success-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .success-ripple {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .success-message h3 {
+    font-size: 1.1rem;
+  }
+  
+  .success-message p {
+    font-size: 0.85rem;
+  }
+}

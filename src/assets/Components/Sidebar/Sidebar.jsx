@@ -6,7 +6,7 @@ import InstagramIcon from "../../Images/instagram.svg"
 import FacebookIcon from "../../Images/facebook.svg"
 import TelegramIcon from "../../Images/telegram.svg"
 import LocationIcon from "../../Images/location.svg"
-import CarIcon from "../../Images/car.svg"
+import CarIcon from "../../Images/car.png"
 import CallIcon from "../../Images/call.svg"
 import "./Sidebar.css"
 
@@ -144,7 +144,7 @@ const Sidebar = ({ isMobile, onTestDriveClick }) => {
           </div>
           <div className="phone-numbers">
             {phoneNumbers.map((phone, index) => (
-              <div key={index} className={`phone-number ${phone.primary ? 'primary' : 'secondary'}`}>
+              <div key={index} className="phone-number">
                 <a href={`tel:${phone.number.replace(/\s/g, '')}`}>
                   {phone.number}
                 </a>

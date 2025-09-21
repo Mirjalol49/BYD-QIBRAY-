@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useLanguage } from '../../../context/LanguageContext'
+import SuccessConfetti from '../SuccessConfetti/SuccessConfetti'
 import './TestDriveModal.css'
 
 const TestDriveModal = ({ isOpen, onClose }) => {
@@ -15,6 +16,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
   const [showValidationErrors, setShowValidationErrors] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -92,11 +94,13 @@ const TestDriveModal = ({ isOpen, onClose }) => {
       
       if (result.success) {
         setSubmitStatus('success')
+        setShowConfetti(true)
         setTimeout(() => {
           onClose()
           setFormData({ name: '', phone: '', date: null, time: '' })
           setSubmitStatus(null)
-        }, 2000)
+          setShowConfetti(false)
+        }, 3000)
       } else {
         setSubmitStatus('error')
       }
@@ -253,6 +257,12 @@ const TestDriveModal = ({ isOpen, onClose }) => {
           </form>
         </div>
       </div>
+      
+      {/* Success Confetti Animation */}
+      <SuccessConfetti 
+        isVisible={showConfetti} 
+        onComplete={() => setShowConfetti(false)}
+      />
     </div>
   )
 }

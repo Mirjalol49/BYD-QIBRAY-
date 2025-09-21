@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage } from '../../../context/LanguageContext'
+import SuccessConfetti from '../SuccessConfetti/SuccessConfetti'
 import './CheckoutModal.css'
 
 const CheckoutModal = ({ isOpen, onClose, car }) => {
@@ -13,6 +14,7 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
   const [showValidationErrors, setShowValidationErrors] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -85,12 +87,14 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
       
       if (result.success) {
         setSubmitStatus('success')
+        setShowConfetti(true)
         setTimeout(() => {
           onClose()
           setFormData({
             name: '', phone: '', address: '', notes: ''
           })
           setSubmitStatus(null)
+          setShowConfetti(false)
         }, 3000)
       } else {
         setSubmitStatus('error')
@@ -250,6 +254,12 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
           </form>
         </div>
       </div>
+      
+      {/* Success Confetti Animation */}
+      <SuccessConfetti 
+        isVisible={showConfetti} 
+        onComplete={() => setShowConfetti(false)}
+      />
     </div>
   )
 }

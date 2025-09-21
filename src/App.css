@@ -13,7 +13,7 @@
   min-height: 100vh;
   overflow-y: auto;
   padding: 0;
-  background: var(--bg);
+  background: rgba(26, 26, 26, 0.92);
 }
 
 /* Responsive adjustments */

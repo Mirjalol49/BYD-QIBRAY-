@@ -1,12 +1,12 @@
 :root {
-  --bg: #0f0f0f; /* Deep dark background */
-  --panel: #1a1a1a; /* Dark panel */
-  --panel-2: #262626; /* Lighter dark panel */
+  --bg: #1a1a1a; /* Deep dark background */
+  --panel: #303030; /* Dark panel */
+  --panel-2: #353535; /* Lighter dark panel */
   --text: #ffffff;
   --muted: #a3a3a3;
   --border: #404040;
-  --accent: #22c55e; /* Green primary */
-  --accent-hover: #16a34a;
+  --accent: #4f73b3; /* Blue from image */
+  --accent-hover: #3d5a8f;
 }
 
 [data-theme="light"] {
@@ -16,7 +16,7 @@
   --text: #ffffff;
   --muted: #a3a3a3;
   --border: #404040;
-  --accent: #22c55e; /* Green primary */
+  --accent: #4f73b3; /* Blue from image */
   
 }
 /* 1. Use a more-intuitive box-sizing model */

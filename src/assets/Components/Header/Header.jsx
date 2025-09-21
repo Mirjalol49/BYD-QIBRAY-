@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useLanguage } from '../../../context/LanguageContext'
+import BannerImage from '../../Images/banner.jpg'
 import './Header.css'
 
 const Header = ({ onFilterChange, activeFilter }) => {
@@ -14,7 +15,13 @@ const Header = ({ onFilterChange, activeFilter }) => {
   return (
     <div className="header-container">
       <div className="header-content">
-        <h1 className="header-title">{t('findPerfectCar')}</h1>
+        <div className="banner-container">
+          <img 
+            src={BannerImage} 
+            alt="BYD Banner" 
+            className="header-banner"
+          />
+        </div>
         
         <div className="filter-buttons">
           {filterOptions.map((option) => (
