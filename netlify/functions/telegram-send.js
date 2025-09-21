@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 
-export const handler = async function(event, context) {
+exports.handler = async function(event, context) {
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ ok: false, error: 'Method Not Allowed' }) };
@@ -19,6 +19,12 @@ export const handler = async function(event, context) {
     // Get environment variables
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const defaultChatId = process.env.TELEGRAM_CHAT_ID;
+
+    // Log environment variables for debugging
+    console.log('Environment variables:', { 
+      botTokenExists: !!botToken, 
+      chatIdExists: !!defaultChatId 
+    });
 
     // Validate environment variables
     if (!botToken || !defaultChatId) {
@@ -43,6 +49,7 @@ export const handler = async function(event, context) {
     });
 
     const tgJson = await tgResp.json();
+    console.log('Telegram API response:', tgJson);
 
     if (!tgResp.ok || !tgJson.ok) {
       return { 
