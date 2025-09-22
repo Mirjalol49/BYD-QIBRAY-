@@ -10,8 +10,8 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    date: null, // Change to null for DatePicker
-    time: '' // Re-add time for separate selection
+    date: null,
+    time: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
@@ -33,6 +33,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
     }))
   }
 
+  // ✅ Updated to use Netlify function
   const sendToTelegram = async (data) => {
     const message =
       `<b>🚗 TEST DRIVE SO'ROVI</b>\n\n` +
@@ -45,14 +46,11 @@ const TestDriveModal = ({ isOpen, onClose }) => {
       `🎯 <b>Harakat</b>: Test drive uchun mijoz bilan bog'laning.`
 
     try {
-      console.log('Sending to Telegram via backend')
+      console.log('Sending to Telegram via Netlify function…')
 
-      const backendApiUrl = import.meta.env.VITE_BACKEND_API_URL || '';
-      const response = await fetch(`${backendApiUrl}/api/telegram/send`, {
+      const response = await fetch('/.netlify/functions/sendTelegram', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message,
           parseMode: 'HTML'
@@ -75,23 +73,23 @@ const TestDriveModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (!formData.name || !formData.phone || !formData.date || !formData.time) {
       setSubmitStatus('error')
-      setShowValidationErrors(true) // Show validation errors
+      setShowValidationErrors(true)
       return
     }
 
     setIsSubmitting(true)
     setSubmitStatus(null)
-    setShowValidationErrors(false) // Hide validation errors on successful submission attempt
+    setShowValidationErrors(false)
 
     try {
       const result = await sendToTelegram({
         ...formData,
-        date: formData.date ? formData.date.toLocaleDateString('uz-UZ') : '' // Format date for Telegram
+        date: formData.date ? formData.date.toLocaleDateString('uz-UZ') : ''
       })
-      
+
       if (result.success) {
         setSubmitStatus('success')
         setShowConfetti(true)
@@ -114,8 +112,8 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   const getTomorrowDate = () => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
-    tomorrow.setHours(9, 0, 0, 0) // Set default time to 09:00 for minDate
-    return tomorrow // Return Date object for DatePicker
+    tomorrow.setHours(9, 0, 0, 0)
+    return tomorrow
   }
 
   if (!isOpen) return null
@@ -124,9 +122,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="test-drive-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2 className="modal-title">
-            {t('testDriveTitle')}
-          </h2>
+          <h2 className="modal-title">{t('testDriveTitle')}</h2>
           <button className="modal-close" onClick={onClose}>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -136,12 +132,10 @@ const TestDriveModal = ({ isOpen, onClose }) => {
 
         <div className="modal-body">
           <p className="modal-description">{t('testDriveDescription')}</p>
-          
+
           <form onSubmit={handleSubmit} className="test-drive-form">
             <div className="form-group">
-              <label htmlFor="name" className="form-label">
-                {t('fullName')}
-              </label>
+              <label htmlFor="name" className="form-label">{t('fullName')}</label>
               <input
                 type="text"
                 id="name"
@@ -155,9 +149,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="phone" className="form-label">
-                {t('phoneNumber')}
-              </label>
+              <label htmlFor="phone" className="form-label">{t('phoneNumber')}</label>
               <input
                 type="tel"
                 id="phone"
@@ -172,9 +164,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="date" className="form-label">
-                  {t('preferredDate')}
-                </label>
+                <label htmlFor="date" className="form-label">{t('preferredDate')}</label>
                 <DatePicker
                   id="date"
                   name="date"
@@ -189,9 +179,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="time" className="form-label">
-                  {t('preferredTime')}
-                </label>
+                <label htmlFor="time" className="form-label">{t('preferredTime')}</label>
                 <select
                   id="time"
                   name="time"
@@ -215,17 +203,11 @@ const TestDriveModal = ({ isOpen, onClose }) => {
             </div>
 
             {submitStatus === 'error' && (
-              <div className="status-message error">
-                <span className="status-icon" aria-hidden="true"></span>
-                {t('submitError')}
-              </div>
+              <div className="status-message error">{t('submitError')}</div>
             )}
 
             {submitStatus === 'success' && (
-              <div className="status-message success">
-                <span className="status-icon" aria-hidden="true"></span>
-                {t('submitSuccess')}
-              </div>
+              <div className="status-message success">{t('submitSuccess')}</div>
             )}
 
             <div className="modal-actions">
@@ -248,17 +230,14 @@ const TestDriveModal = ({ isOpen, onClose }) => {
                     {t('submitting')}
                   </>
                 ) : (
-                  <>
-                    {t('scheduleTestDrive')}
-                  </>
+                  <>{t('scheduleTestDrive')}</>
                 )}
               </button>
             </div>
           </form>
         </div>
       </div>
-      
-      {/* Success Confetti Animation */}
+
       <SuccessConfetti 
         isVisible={showConfetti} 
         onComplete={() => setShowConfetti(false)}
