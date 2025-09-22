@@ -17,6 +17,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
   const [submitStatus, setSubmitStatus] = useState(null)
   const [showValidationErrors, setShowValidationErrors] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -24,6 +25,8 @@ const TestDriveModal = ({ isOpen, onClose }) => {
       ...prev,
       [name]: value
     }))
+    setSubmitStatus(null)
+    setErrorMessage('')
   }
 
   const handleDateChange = (date) => {
@@ -31,24 +34,34 @@ const TestDriveModal = ({ isOpen, onClose }) => {
       ...prev,
       date: date
     }))
+    setSubmitStatus(null)
+    setErrorMessage('')
   }
 
   // ✅ Updated to use Netlify function
   const sendToTelegram = async (data) => {
+    // Format the date inside this function for better encapsulation and reliability
+    const formattedDate = data.date ? new Date(data.date).toLocaleDateString('uz-UZ') : '';
+
     const message =
       `<b>🚗 TEST DRIVE SO'ROVI</b>\n\n` +
       `👤 <b>Mijoz ma'lumotlari</b>\n` +
       `• Ism: ${data.name}\n` +
       `• Telefon: ${data.phone}\n` +
-      `• Sana: ${data.date}\n` +
+      `• Sana: ${formattedDate}\n` +
       `• Vaqt: ${data.time}\n\n` +
       `📅 <b>So'rov vaqti</b>: ${new Date().toLocaleString('uz-UZ')}\n` +
       `🎯 <b>Harakat</b>: Test drive uchun mijoz bilan bog'laning.`
 
     try {
-      console.log('Sending to Telegram via Netlify function…')
+      // Use environment-specific endpoint
+      const endpoint = import.meta.env.DEV
+        ? 'http://localhost:5001/api/telegram/send' // For local development
+        : '/.netlify/functions/telegram-send' // For Netlify production
 
-      const response = await fetch('/.netlify/functions/sendTelegram', {
+      console.log(`Sending to Telegram via ${endpoint}…`)
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -73,6 +86,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setErrorMessage('')
 
     if (!formData.name || !formData.phone || !formData.date || !formData.time) {
       setSubmitStatus('error')
@@ -85,10 +99,7 @@ const TestDriveModal = ({ isOpen, onClose }) => {
     setShowValidationErrors(false)
 
     try {
-      const result = await sendToTelegram({
-        ...formData,
-        date: formData.date ? formData.date.toLocaleDateString('uz-UZ') : ''
-      })
+      const result = await sendToTelegram(formData)
 
       if (result.success) {
         setSubmitStatus('success')
@@ -101,9 +112,11 @@ const TestDriveModal = ({ isOpen, onClose }) => {
         }, 3000)
       } else {
         setSubmitStatus('error')
+        setErrorMessage(result.error || t('submitError'))
       }
     } catch (error) {
       setSubmitStatus('error')
+      setErrorMessage(error.message || t('submitError'))
     } finally {
       setIsSubmitting(false)
     }
@@ -203,7 +216,9 @@ const TestDriveModal = ({ isOpen, onClose }) => {
             </div>
 
             {submitStatus === 'error' && (
-              <div className="status-message error">{t('submitError')}</div>
+              <div className="status-message error">
+                {errorMessage || t('submitError')}
+              </div>
             )}
 
             {submitStatus === 'success' && (

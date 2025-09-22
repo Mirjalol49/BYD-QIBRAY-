@@ -15,6 +15,7 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
   const [submitStatus, setSubmitStatus] = useState(null)
   const [showValidationErrors, setShowValidationErrors] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -22,6 +23,8 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
       ...prev,
       [name]: value
     }))
+    setSubmitStatus(null)
+    setErrorMessage('')
   }
 
   // ✅ Updated to call Netlify Function
@@ -42,10 +45,15 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
       `🎯 <b>Harakat</b>: Mijoz bilan bog'lanib, sotib olish jarayonini boshlang.`
 
     try {
-      console.log('Sending to Telegram via Netlify Function')
+      // Use environment-specific endpoint
+      const endpoint = import.meta.env.DEV
+        ? 'http://localhost:5001/api/telegram/send' // For local development
+        : '/.netlify/functions/telegram-send' // For Netlify production
 
-      // 🚀 Call serverless function directly (no localhost)
-      const response = await fetch('/api/telegram/send', {
+      console.log(`Sending to Telegram via ${endpoint}…`)
+
+      // 🚀 Call serverless function or local server
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message, parseMode: 'HTML' })
@@ -67,6 +75,7 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setErrorMessage('')
     
     if (!formData.name || !formData.phone) {
       setSubmitStatus('error')
@@ -92,9 +101,11 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
         }, 3000)
       } else {
         setSubmitStatus('error')
+        setErrorMessage(result.error || t('submitError'))
       }
     } catch (error) {
       setSubmitStatus('error')
+      setErrorMessage(error.message || t('submitError'))
     } finally {
       setIsSubmitting(false)
     }
@@ -173,7 +184,9 @@ const CheckoutModal = ({ isOpen, onClose, car }) => {
               </div>
             </div>
 
-            {submitStatus === 'error' && <div className="status-message error">{t('submitError')}</div>}
+            {submitStatus === 'error' && (
+              <div className="status-message error">{errorMessage || t('submitError')}</div>
+            )}
             {submitStatus === 'success' && <div className="status-message success">{t('purchaseSuccess')}</div>}
 
             <div className="modal-actions">

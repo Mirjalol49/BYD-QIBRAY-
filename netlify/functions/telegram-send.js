@@ -1,73 +1,97 @@
-// netlify/functions/sendTelegram.js
-const fetch = require("node-fetch"); // add this if not already in your dependencies
+exports.handler = async function (event, context) {
+  // Set CORS headers
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+  }
 
-exports.handler = async function (event) {
-  if (event.httpMethod !== "POST") {
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers, body: '' }
+  }
+
+  if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: JSON.stringify({ ok: false, error: "Method Not Allowed" }),
-    };
+      headers,
+      body: JSON.stringify({ ok: false, error: "Method Not Allowed" })
+    }
   }
 
   try {
-    const body = JSON.parse(event.body || "{}");
-    const { message, parseMode } = body;
+    const body = JSON.parse(event.body || '{}')
+    const { message, parseMode } = body
 
-    if (!message || typeof message !== "string" || message.trim().length === 0) {
+    if (!message || typeof message !== 'string' || message.trim().length === 0) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ ok: false, error: "Message is required" }),
-      };
+        headers,
+        body: JSON.stringify({ ok: false, error: "Message is required" })
+      }
     }
 
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const botToken = process.env.TELEGRAM_BOT_TOKEN
+    const chatId = process.env.TELEGRAM_CHAT_ID
 
-    console.log("botToken exists:", !!botToken, "chatId exists:", !!chatId);
+    console.log('Environment check:', { 
+      botToken: !!botToken, 
+      chatId: !!chatId,
+      messageLength: message.length 
+    })
 
     if (!botToken || !chatId) {
       return {
         statusCode: 500,
+        headers,
         body: JSON.stringify({
           ok: false,
-          error: "Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID",
-        }),
-      };
+          error: "Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID"
+        })
+      }
     }
 
-    const resp = await fetch(
-      `https://api.telegram.org/bot${botToken}/sendMessage`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: parseMode || "HTML",
-        }),
-      }
-    );
+    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`
+    
+    const response = await fetch(telegramUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: parseMode || 'HTML'
+      })
+    })
 
-    const json = await resp.json();
-    console.log("Telegram API response:", json);
+    const result = await response.json()
+    console.log('Telegram API response:', result)
 
-    if (!resp.ok || !json.ok) {
+    if (!response.ok || !result.ok) {
       return {
         statusCode: 502,
+        headers,
         body: JSON.stringify({
           ok: false,
-          error: json.description || "Telegram API error",
-          telegram: json,
-        }),
-      };
+          error: result.description || 'Telegram API error',
+          details: result
+        })
+      }
     }
 
-    return { statusCode: 200, body: JSON.stringify({ ok: true, telegram: json }) };
-  } catch (err) {
-    console.error("Function error:", err);
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ ok: true, result })
+    }
+
+  } catch (error) {
+    console.error('Function error:', error)
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, error: err.message || "Unexpected error" }),
-    };
+      headers,
+      body: JSON.stringify({ 
+        ok: false, 
+        error: error.message || 'Unexpected error' 
+      })
+    }
   }
-};
+}
