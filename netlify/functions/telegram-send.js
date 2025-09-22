@@ -1,97 +1,97 @@
-exports.handler = async function (event, context) {
-  // Set CORS headers
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
-  }
+import dotenv from 'dotenv'
+import fetch from 'node-fetch'
 
+// This loads environment variables from your Netlify UI settings.
+dotenv.config()
+
+const botToken = process.env.TELEGRAM_BOT_TOKEN
+const defaultChatId = process.env.TELEGRAM_CHAT_ID
+
+const headers = {
+  'Access-Control-Allow-Origin': '*', // Allow requests from any origin
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Content-Type': 'application/json'
+};
+
+export async function handler(event) {
+  // Handle CORS preflight requests for browsers
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers, body: '' }
+    return {
+      statusCode: 204,
+      headers,
+      body: ''
+    };
   }
 
+  // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
       headers,
-      body: JSON.stringify({ ok: false, error: "Method Not Allowed" })
+      body: JSON.stringify({ ok: false, error: 'Method Not Allowed' }),
     }
   }
 
+  console.log('\n--- [Netlify Function: telegram-send] ---')
+  console.log(`[${new Date().toISOString()}] Received a new request.`)
+
   try {
-    const body = JSON.parse(event.body || '{}')
-    const { message, parseMode } = body
+    // The request body from the frontend is in event.body
+    const { message, chatId, parseMode } = JSON.parse(event.body || '{}')
 
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
+      console.error('❌ Validation Error: Message is missing or empty.')
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ ok: false, error: "Message is required" })
+        body: JSON.stringify({ ok: false, error: 'Message is required' }),
       }
     }
 
-    const botToken = process.env.TELEGRAM_BOT_TOKEN
-    const chatId = process.env.TELEGRAM_CHAT_ID
-
-    console.log('Environment check:', { 
-      botToken: !!botToken, 
-      chatId: !!chatId,
-      messageLength: message.length 
-    })
-
-    if (!botToken || !chatId) {
+    const finalChatId = chatId || defaultChatId
+    if (!botToken || !finalChatId) {
+      console.error('❌ Server Configuration Error: Bot token or Chat ID is missing on Netlify.')
+      if (!botToken) console.error('TELEGRAM_BOT_TOKEN is not set in Netlify environment variables.');
+      if (!finalChatId) console.error('TELEGRAM_CHAT_ID is not set in Netlify environment variables.');
+      
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({
-          ok: false,
-          error: "Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID"
-        })
+        body: JSON.stringify({ ok: false, error: 'Server is missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID' }),
       }
     }
 
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`
-    
-    const response = await fetch(telegramUrl, {
+    console.log('Attempting to send message to Telegram...')
+    const tgResp = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        chat_id: chatId,
+        chat_id: finalChatId,
         text: message,
-        parse_mode: parseMode || 'HTML'
-      })
+        parse_mode: parseMode || 'HTML',
+      }),
     })
 
-    const result = await response.json()
-    console.log('Telegram API response:', result)
+    const tgJson = await tgResp.json()
+    console.log('Received response from Telegram API:', JSON.stringify(tgJson, null, 2))
 
-    if (!response.ok || !result.ok) {
-      return {
-        statusCode: 502,
-        headers,
-        body: JSON.stringify({
-          ok: false,
-          error: result.description || 'Telegram API error',
-          details: result
-        })
-      }
+    if (!tgResp.ok || !tgJson.ok) {
+      console.error('❌ Telegram API Error:', tgJson.description || 'Unknown error')
+      return { statusCode: 502, headers, body: JSON.stringify({ ok: false, error: tgJson.description || 'Telegram API error' }) }
     }
 
+    console.log('✅ Successfully sent message to Telegram.')
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ ok: true, result })
+      body: JSON.stringify({ ok: true, telegram: tgJson }),
     }
-
-  } catch (error) {
-    console.error('Function error:', error)
+  } catch (err) {
+    console.error('❌ Unexpected Function Error:', err)
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
-        ok: false, 
-        error: error.message || 'Unexpected error' 
-      })
+      body: JSON.stringify({ ok: false, error: err.message || 'Unexpected error' }),
     }
   }
 }
